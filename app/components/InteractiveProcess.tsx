@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { ArrowRight, BarChart3, Handshake, Lightbulb, MessageSquareText, Search, Wrench } from "lucide-react";
+import { BarChart3, Handshake, Lightbulb, MessageSquareText, Search, Wrench } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRef, useState } from "react";
 import { GradientShapes } from "./InteractiveCards";
@@ -58,7 +57,13 @@ export function InteractiveProcess() {
           <div className="journey-progress" aria-hidden="true"><span style={{ width: `${((active + 1) / processSteps.length) * 100}%` }}/></div>
         </div>
       </div>
-      <Reveal className="section-action"><span>Ready to begin at step one?</span><Link className="text-cta" href="/work-with-us">Start a conversation <ArrowRight size={17}/></Link></Reveal>
+      <Reveal className="signature-visual">
+        <div><span className="signature-icon"><Lightbulb/></span><strong>Idea</strong><small>Choose one useful concept</small></div>
+        <motion.span className="signature-flow" aria-hidden="true"><motion.i animate={{ x: ["-100%", "260%"] }} transition={{ duration: 2.8, repeat: Infinity, repeatDelay: 0.7, ease: "easeInOut" }}/></motion.span>
+        <div><span className="signature-icon"><Wrench/></span><strong>Experiment</strong><small>Try one practical change</small></div>
+        <motion.span className="signature-flow" aria-hidden="true"><motion.i animate={{ x: ["-100%", "260%"] }} transition={{ duration: 2.8, delay: 0.55, repeat: Infinity, repeatDelay: 0.7, ease: "easeInOut" }}/></motion.span>
+        <div><span className="signature-icon"><BarChart3/></span><strong>Learning</strong><small>Observe and document</small></div>
+      </Reveal>
     </div>
   </section>;
 }

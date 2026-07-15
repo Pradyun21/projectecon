@@ -1,68 +1,56 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowDown, ArrowRight, Building2, Check, CircleDollarSign, Compass, Lightbulb, MapPin } from "lucide-react";
+import { ArrowDown, ArrowRight, BadgeDollarSign, CalendarX2, CircleDollarSign, Compass, FlaskConical, Lightbulb, MousePointerClick, NotebookTabs, Percent, Repeat2, ShieldCheck, SlidersHorizontal, Users } from "lucide-react";
 import { motion } from "framer-motion";
 import { CallToAction, Reveal } from "./SiteShell";
-import { ExpandableInfoCard, GradientShapes } from "./InteractiveCards";
+import { ExpandableInfoCard, ExplorationCard, GradientShapes } from "./InteractiveCards";
 import { InteractiveProcess } from "./InteractiveProcess";
 import { MOTION } from "./motion";
 
 export function HeroSection() {
   return <section className="hero">
-    <div className="hero-gradient"/>
-    <div className="hero-grid-bg"/>
-    <GradientShapes variant="navy"/>
+    <div className="hero-gradient"/><div className="hero-grid-bg"/><GradientShapes variant="navy"/>
     <motion.div className="hero-light hero-light-one" animate={{ x: [0, 16, 0], y: [0, -10, 0] }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}/>
     <motion.div className="hero-light hero-light-two" animate={{ x: [0, -12, 0], y: [0, 12, 0] }} transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}/>
-    <div className="container hero-layout">
-      <motion.div className="hero-copy" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: MOTION.reveal, ease: MOTION.ease }}>
-        <p className="eyebrow"><span/>Free • Student-led • Cabarrus County</p>
-        <h1>Practical economics.<br/><em>Local impact.</em></h1>
-        <p className="lead">Project Econ helps small businesses and organizations solve real problems by applying one focused economic concept at a time.</p>
-        <div className="hero-actions">
-          <Link className="button" href="/work-with-us">Work With Us <ArrowRight size={18}/></Link>
-          <a className="button button-secondary" href="#process">See How It Works <ArrowDown size={17}/></a>
-        </div>
-        <a className="hero-prompt" href="#process"><span>Click below to explore how Project Econ works.</span><ArrowDown size={17}/></a>
-      </motion.div>
-    </div>
-    <div className="hero-fade"/>
+    <div className="container hero-layout"><motion.div className="hero-copy" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: MOTION.reveal, ease: MOTION.ease }}>
+      <p className="eyebrow"><span/>Free • Student-led • Cabarrus County</p>
+      <h1>Practical economics.<br/><em>Local impact.</em></h1>
+      <p className="lead">Project Econ helps small businesses and organizations solve real problems by applying one focused economic concept at a time.</p>
+      <a className="hero-prompt" href="#process"><span className="hero-scroll-circle"><ArrowDown size={18}/></span><span>Scroll to explore</span></a>
+    </motion.div></div><div className="hero-fade"/>
   </section>;
 }
 
-export function MissionSection() {
-  return <section className="section mission-section">
-    <GradientShapes variant="blue"/>
-    <div className="container">
-      <div className="split">
-        <Reveal><p className="eyebrow">Our mission</p><h2>Bring useful ideas out of the textbook.</h2></Reveal>
-        <Reveal><p className="large-copy">We help small businesses and organizations in Cabarrus County apply economics to real problems.</p><p>Project Econ makes those ideas practical, accessible, and focused enough to try.</p><div className="mini-points"><span><Check/> Local first</span><span><Check/> Practical by design</span><span><Check/> Simple and focused</span></div></Reveal>
-      </div>
-      <Reveal className="expand-grid">
-        <ExpandableInfoCard icon={MapPin} title="Local first" summary="Built around Cabarrus County" detail="We focus on nearby businesses and organizations so every conversation stays grounded in the community we know."/>
-        <ExpandableInfoCard icon={Compass} title="Practical by design" summary="One useful next step" detail="We turn a broad challenge into one focused strategy that an organization can realistically try."/>
-        <ExpandableInfoCard icon={Lightbulb} title="Simple and focused" summary="One concept at a time" detail="A narrow approach makes it easier to implement the idea, observe what happens, and learn from the result."/>
-      </Reveal>
-      <Reveal className="section-action"><span>Have a challenge worth exploring?</span><Link className="text-cta" href="/work-with-us">Work With Us <ArrowRight size={17}/></Link></Reveal>
-    </div>
-  </section>;
+export function DifferenceSection() {
+  return <section className="section community-section"><GradientShapes variant="navy"/><div className="container">
+    <Reveal className="section-head"><p className="eyebrow">Why Project Econ is different</p><h2>Small enough to try. Clear enough to learn from.</h2><p>Open a card to see the principles behind every project.</p></Reveal>
+    <Reveal className="expand-grid">
+      <ExpandableInfoCard icon={CircleDollarSign} title="Free by design" summary="No fee or obligation" detail="Project Econ is a student-led learning initiative. Organizations contribute context and feedback, never a project fee."/>
+      <ExpandableInfoCard icon={FlaskConical} title="Experiment-sized" summary="One concept, one next step" detail="A narrow scope keeps each recommendation realistic to implement and makes the outcome easier to observe."/>
+      <ExpandableInfoCard icon={NotebookTabs} title="Openly documented" summary="Process and learning, not promises" detail="Completed work will explain the challenge, idea, implementation, result, and lesson—including what did not work."/>
+    </Reveal>
+  </div></section>;
 }
 
-export function CommunitySection() {
-  return <section className="section community-section">
-    <GradientShapes variant="navy"/>
-    <div className="container">
-      <Reveal className="section-head"><p className="eyebrow">Built for the community</p><h2>Low friction. Real attention.</h2><p>Open either card to learn what working together looks like.</p></Reveal>
-      <Reveal className="expand-grid expand-grid-two">
-        <ExpandableInfoCard icon={CircleDollarSign} title="Completely free" summary="No fee and no obligation" detail="Project Econ does not charge businesses or organizations. The goal is to gain practical experience while helping the local community."/>
-        <ExpandableInfoCard icon={Building2} title="Early partners welcome" summary="Small businesses and organizations" detail="We are looking for our first Cabarrus County partners. Completed projects will be documented on the Our Work page as the initiative grows."/>
-      </Reveal>
-      <Reveal className="community-action"><div><p className="eyebrow light">Start with a conversation</p><h3>Tell us what your organization is working through.</h3></div><Link className="button button-white" href="/work-with-us">Work With Us <ArrowRight size={18}/></Link></Reveal>
-    </div>
-  </section>;
+export function ExplorationSection() {
+  return <section className="section future-section"><div className="container">
+    <Reveal className="exploration-head"><div><p className="eyebrow">Areas we’re exploring</p><h2>Real questions, viewed through an economic lens.</h2></div><div><p>These are examples of the decisions a future project could investigate—not a fixed menu.</p><Link className="text-cta" href="/our-work">View Projects <ArrowRight size={17}/></Link></div></Reveal>
+    <Reveal className="exploration-grid">
+      <ExplorationCard icon={MousePointerClick} title="Customer decisions" summary="How people compare and choose" problem="Customers view a service but rarely take the next step." question="Is the decision unclear or overloaded?" approach="Compare one simpler path with the current experience."/>
+      <ExplorationCard icon={BadgeDollarSign} title="Pricing" summary="How value is understood" problem="Customers hesitate even when the offer is competitive." question="How is the reference price shaping value?" approach="Test a clearer anchor, bundle, or price presentation."/>
+      <ExplorationCard icon={Users} title="Participation" summary="What helps people take part" problem="A useful community program receives limited sign-ups." question="Which friction point prevents participation?" approach="Make one action easier to notice or complete."/>
+      <ExplorationCard icon={Repeat2} title="Retention" summary="What brings people back" problem="First-time visitors rarely return." question="What supports follow-through after the first visit?" approach="Try one timely reminder or commitment cue."/>
+      <ExplorationCard icon={SlidersHorizontal} title="Choice architecture" summary="How options are arranged" problem="Too many service options slow customers down." question="Would a different choice structure reduce effort?" approach="Reorder, group, or simplify the available options."/>
+      <ExplorationCard icon={Lightbulb} title="Incentives" summary="What encourages action" problem="A desired action has little immediate motivation." question="Which reward matters, and when?" approach="Test one modest, well-timed incentive."/>
+      <ExplorationCard icon={Compass} title="Defaults" summary="The power of the starting option" problem="People abandon a setup with several equal paths." question="Could a helpful starting choice reduce friction?" approach="Offer a clear default while preserving alternatives."/>
+      <ExplorationCard icon={ShieldCheck} title="Trust" summary="How confidence is built" problem="Visitors hesitate before contacting an unfamiliar organization." question="Which signals reduce uncertainty?" approach="Test clearer expectations, proof, or process language."/>
+      <ExplorationCard icon={Percent} title="Promotions" summary="How an offer gets attention" problem="A promotion is seen but not acted on." question="Does its frame make the value easy to understand?" approach="Compare one message or offer structure at a time."/>
+      <ExplorationCard icon={CalendarX2} title="Appointment no-shows" summary="What improves follow-through" problem="Missed appointments create unused time." question="Which reminder or commitment cue might help?" approach="Try a timely confirmation or planning prompt."/>
+    </Reveal>
+  </div></section>;
 }
 
 export function HomePage() {
-  return <><HeroSection/><MissionSection/><InteractiveProcess/><CommunitySection/><CallToAction/></>;
+  return <><HeroSection/><InteractiveProcess/><DifferenceSection/><ExplorationSection/><CallToAction title="Bring us a problem worth exploring." text="If your Cabarrus County business or organization has a focused challenge, tell us about it. We’ll listen and decide together whether Project Econ is a useful fit."/></>;
 }
