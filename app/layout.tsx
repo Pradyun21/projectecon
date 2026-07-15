@@ -16,7 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: { default: "Project Econ | Practical Economics. Local Impact.", template: "%s | Project Econ" },
     description,
     icons: { icon: "/project-econ-p.png", shortcut: "/project-econ-p.png" },
-    openGraph: { title: "Project Econ | Practical Economics. Local Impact.", description, type: "website", url: origin, images: [{ url: `${origin}/og.png`, width: 1731, height: 909, alt: "Practical economics. Local impact." }] },
+    openGraph: { title: "Project Econ | Practical Economics. Local Impact.", description, type: "website", url: origin, images: [{ url: `${origin}/og.png`, width: 1728, height: 910, alt: "Practical economics. Local impact." }] },
     twitter: { card: "summary_large_image", title: "Project Econ | Practical Economics. Local Impact.", description, images: [`${origin}/og.png`] },
   };
 }

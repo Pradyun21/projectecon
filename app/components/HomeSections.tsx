@@ -1,18 +1,68 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowDown, ArrowRight, Building2, Check, CircleDollarSign, Compass, Lightbulb, MapPin, Search, Sparkles, TrendingUp } from "lucide-react";
+import { ArrowDown, ArrowRight, Building2, Check, CircleDollarSign, Compass, Lightbulb, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
 import { CallToAction, Reveal } from "./SiteShell";
 import { ExpandableInfoCard, GradientShapes } from "./InteractiveCards";
 import { InteractiveProcess } from "./InteractiveProcess";
+import { MOTION } from "./motion";
 
-export function HeroSection(){return <section className="hero"><div className="hero-gradient"/><div className="hero-grid-bg"/><GradientShapes variant="blue"/><motion.div className="hero-orbit orbit-a" animate={{x:[0,16,0],y:[0,-10,0]}} transition={{duration:9,repeat:Infinity,ease:"easeInOut"}}/><motion.div className="hero-orbit orbit-b" animate={{x:[0,-18,0],y:[0,12,0]}} transition={{duration:11,repeat:Infinity,ease:"easeInOut"}}/><div className="container hero-layout"><motion.div initial={{opacity:0,y:25}} animate={{opacity:1,y:0}} transition={{duration:.7}}><p className="eyebrow"><span/>Free • Student-led • Cabarrus County</p><h1>Practical economics.<br/><em>Local impact.</em></h1><p className="lead">Project Econ helps small businesses and organizations solve real problems by applying one focused economic concept at a time.</p><div className="hero-actions"><Link className="button button-glow" href="/contact">Work With Us <ArrowRight size={18}/></Link><a className="text-link" href="#process">See How It Works <ArrowDown size={17}/></a></div></motion.div><motion.div className="hero-visual" initial={{opacity:0,scale:.94}} animate={{opacity:1,scale:1}} transition={{duration:.8,delay:.15}}><motion.div className="visual-card card-float" animate={{y:[0,-8,0]}} transition={{duration:4,repeat:Infinity}}><Sparkles/><span>Economics made useful</span></motion.div><div className="flow-visual"><div><span><Search/></span><small>Problem</small></div><i/><div><span><Lightbulb/></span><small>Strategy</small></div><i/><div><span><TrendingUp/></span><small>Results</small></div></div><div className="visual-card card-main"><span>ONE WEEK / ONE IDEA</span><strong>A small, focused experiment.</strong><p>Listen → Apply → Learn</p></div><div className="node n1"/><div className="node n2"/><div className="node n3"/></motion.div></div><div className="hero-fade"/></section>}
+export function HeroSection() {
+  return <section className="hero">
+    <div className="hero-gradient"/>
+    <div className="hero-grid-bg"/>
+    <GradientShapes variant="navy"/>
+    <motion.div className="hero-light hero-light-one" animate={{ x: [0, 16, 0], y: [0, -10, 0] }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}/>
+    <motion.div className="hero-light hero-light-two" animate={{ x: [0, -12, 0], y: [0, 12, 0] }} transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}/>
+    <div className="container hero-layout">
+      <motion.div className="hero-copy" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: MOTION.reveal, ease: MOTION.ease }}>
+        <p className="eyebrow"><span/>Free • Student-led • Cabarrus County</p>
+        <h1>Practical economics.<br/><em>Local impact.</em></h1>
+        <p className="lead">Project Econ helps small businesses and organizations solve real problems by applying one focused economic concept at a time.</p>
+        <div className="hero-actions">
+          <Link className="button" href="/work-with-us">Work With Us <ArrowRight size={18}/></Link>
+          <a className="button button-secondary" href="#process">See How It Works <ArrowDown size={17}/></a>
+        </div>
+        <a className="hero-prompt" href="#process"><span>Click below to explore how Project Econ works.</span><ArrowDown size={17}/></a>
+      </motion.div>
+    </div>
+    <div className="hero-fade"/>
+  </section>;
+}
 
-export function MissionSection(){return <section className="section mission-section"><GradientShapes variant="purple"/><div className="container"><div className="split"><Reveal><p className="eyebrow">Our Mission</p><h2>Bring useful ideas out of the textbook.</h2></Reveal><Reveal><p className="large-copy">Our mission is to help small businesses and organizations in Cabarrus County by taking economic concepts and applying them to real problems.</p><p>We want to make economics more useful, practical, and accessible for organizations in our community.</p><div className="mini-points"><span><Check/> Local first</span><span><Check/> Practical by design</span><span><Check/> Simple and focused</span></div></Reveal></div><Reveal className="expand-grid"><ExpandableInfoCard icon={MapPin} title="Local first" summary="Built around Cabarrus County" detail="We focus on nearby businesses and organizations so every conversation stays grounded in the community we know."/><ExpandableInfoCard icon={Compass} title="Practical by design" summary="One useful next step" detail="We turn a broad challenge into one focused strategy that an organization can realistically try."/><ExpandableInfoCard icon={Lightbulb} title="Simple and focused" summary="One concept at a time" detail="A narrow approach makes it easier to implement the idea, observe what happens, and learn from the result."/></Reveal></div></section>}
+export function MissionSection() {
+  return <section className="section mission-section">
+    <GradientShapes variant="blue"/>
+    <div className="container">
+      <div className="split">
+        <Reveal><p className="eyebrow">Our mission</p><h2>Bring useful ideas out of the textbook.</h2></Reveal>
+        <Reveal><p className="large-copy">We help small businesses and organizations in Cabarrus County apply economics to real problems.</p><p>Project Econ makes those ideas practical, accessible, and focused enough to try.</p><div className="mini-points"><span><Check/> Local first</span><span><Check/> Practical by design</span><span><Check/> Simple and focused</span></div></Reveal>
+      </div>
+      <Reveal className="expand-grid">
+        <ExpandableInfoCard icon={MapPin} title="Local first" summary="Built around Cabarrus County" detail="We focus on nearby businesses and organizations so every conversation stays grounded in the community we know."/>
+        <ExpandableInfoCard icon={Compass} title="Practical by design" summary="One useful next step" detail="We turn a broad challenge into one focused strategy that an organization can realistically try."/>
+        <ExpandableInfoCard icon={Lightbulb} title="Simple and focused" summary="One concept at a time" detail="A narrow approach makes it easier to implement the idea, observe what happens, and learn from the result."/>
+      </Reveal>
+      <Reveal className="section-action"><span>Have a challenge worth exploring?</span><Link className="text-cta" href="/work-with-us">Work With Us <ArrowRight size={17}/></Link></Reveal>
+    </div>
+  </section>;
+}
 
-export function FreeSupport(){return <section className="section support-section"><div className="container"><Reveal className="free-card"><div className="free-icon"><CircleDollarSign/></div><div><p className="eyebrow">No cost</p><h2>Everything we do is completely free.</h2><p>Project Econ does not charge businesses or organizations. Our goal is to gain experience applying economics while helping our local community.</p><small>Project Econ offers educational recommendations. Results are not guaranteed.</small></div></Reveal></div></section>}
+export function CommunitySection() {
+  return <section className="section community-section">
+    <GradientShapes variant="navy"/>
+    <div className="container">
+      <Reveal className="section-head"><p className="eyebrow">Built for the community</p><h2>Low friction. Real attention.</h2><p>Open either card to learn what working together looks like.</p></Reveal>
+      <Reveal className="expand-grid expand-grid-two">
+        <ExpandableInfoCard icon={CircleDollarSign} title="Completely free" summary="No fee and no obligation" detail="Project Econ does not charge businesses or organizations. The goal is to gain practical experience while helping the local community."/>
+        <ExpandableInfoCard icon={Building2} title="Early partners welcome" summary="Small businesses and organizations" detail="We are looking for our first Cabarrus County partners. Completed projects will be documented on the Our Work page as the initiative grows."/>
+      </Reveal>
+      <Reveal className="community-action"><div><p className="eyebrow light">Start with a conversation</p><h3>Tell us what your organization is working through.</h3></div><Link className="button button-white" href="/work-with-us">Work With Us <ArrowRight size={18}/></Link></Reveal>
+    </div>
+  </section>;
+}
 
-export function CompaniesSection(){return <section className="section partners-section"><GradientShapes variant="blue"/><div className="container"><Reveal className="empty-card"><div className="empty-icon"><Building2/></div><p className="eyebrow">Early partners wanted</p><h2>Businesses and Organizations We Have Worked With</h2><p>We are currently looking for our first local businesses and organizations to work with. Completed projects will be added here soon.</p><Link className="button button-glow" href="/contact">Become an Early Partner <ArrowRight size={18}/></Link></Reveal></div></section>}
-
-export function HomePage(){return <><HeroSection/><MissionSection/><InteractiveProcess/><FreeSupport/><CompaniesSection/><CallToAction/></>}
+export function HomePage() {
+  return <><HeroSection/><MissionSection/><InteractiveProcess/><CommunitySection/><CallToAction/></>;
+}

@@ -1,6 +1,1 @@
-import type { Metadata } from "next";
-import { Mail, MapPin, MessageSquare } from "lucide-react";
-import { ContactForm } from "../components/ContactForm";
-import { PageIntro, Reveal } from "../components/SiteShell";
-export const metadata:Metadata={title:"Contact",description:"Tell Project Econ about the problem your Cabarrus County organization is facing."};
-export default function Contact(){return <><PageIntro eyebrow="Work with us" title="Tell us about your business and the problem you are facing." text="You do not need to know which economic concept fits. Start by telling us what is happening—we’ll listen."/><section className="section contact-section"><div className="container contact-layout"><Reveal><div className="contact-copy"><p className="eyebrow">What to expect</p><h2>A simple first conversation.</h2><p>We may follow up by email, phone, text, or an in-person meeting to better understand the situation. There is no cost and no obligation.</p><ul><li><MessageSquare/> We listen before suggesting anything.</li><li><MapPin/> We focus on Cabarrus County organizations.</li><li><Mail/> hello@projectecon.org <small>Placeholder</small></li></ul><div className="disclaimer"><strong>A clear note</strong><p>Project Econ is student-led. We provide educational recommendations and cannot guarantee results.</p></div></div></Reveal><Reveal><ContactForm/></Reveal></div></section></>}
+export { default, metadata } from "../work-with-us/page";

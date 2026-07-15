@@ -1,6 +1,20 @@
 import type { Metadata } from "next";
 import { BookOpen, GraduationCap, MapPin } from "lucide-react";
 import { CallToAction, PageIntro, Reveal } from "../components/SiteShell";
-export const metadata:Metadata={title:"About",description:"Why Project Econ brings classroom economic concepts into the Cabarrus County community."};
-const model=["One business or organization every week","One problem to focus on","One economic concept","One suggested strategy","One week to help implement it","A review of the results"];
-export default function About(){return <><PageIntro eyebrow="About Project Econ" title="Economics should be useful beyond the classroom." text="Project Econ was created to take clear economic ideas and apply them to real situations in Cabarrus County."/><section className="section"><div className="container split about-story"><Reveal><p className="eyebrow">Why it started</p><h2>Local problems deserve thoughtful attention.</h2></Reveal><Reveal><p className="large-copy">Small businesses and local organizations face real problems involving customers, pricing, participation, decision-making, and incentives.</p><p>Project Econ was created because economic concepts should not only stay inside classrooms and textbooks. We use those ideas as a practical lens—then focus on one reasonable next step.</p></Reveal></div></section><section className="section process-section"><div className="container"><Reveal className="section-head"><p className="eyebrow">The model</p><h2>Simple on purpose.</h2></Reveal><div className="model-grid">{model.map((x,i)=><Reveal className="model-card" key={x}><span>{i+1}</span><p>{x}</p></Reveal>)}</div></div></section><section className="section"><div className="container"><Reveal className="founder-card"><div className="founder-placeholder"><GraduationCap/><span>Founder photo</span></div><div><p className="eyebrow">Founder</p><h2>A student-led beginning.</h2><p className="large-copy">Project Econ was founded by a student interested in economics, behavioral economics, business, and helping the local community.</p><div className="founder-meta"><span><BookOpen/> Name, school & experience</span><span><MapPin/> Cabarrus County, NC</span></div><small>Founder details can be added here when ready.</small></div></Reveal></div></section><CallToAction/></>}
+
+export const metadata: Metadata = { title: "About", description: "Why Project Econ brings classroom economic concepts into the Cabarrus County community." };
+
+export default function About() {
+  return <>
+    <PageIntro eyebrow="About Project Econ" title="Economics should be useful beyond the classroom." text="Project Econ takes clear economic ideas and applies them to real situations in Cabarrus County."/>
+    <section className="section about-overview"><div className="container split">
+      <Reveal><p className="eyebrow">Project overview</p><h2>Local problems deserve thoughtful attention.</h2></Reveal>
+      <Reveal><p className="large-copy">Small businesses and local organizations face real questions about customers, pricing, participation, decision-making, and incentives.</p><p>Project Econ uses economics as a practical lens. We listen to the challenge, choose one useful concept, and focus on a reasonable next step—without adding unnecessary complexity.</p></Reveal>
+    </div></section>
+    <section className="section founder-section"><div className="container"><Reveal className="founder-card">
+      <div className="founder-placeholder"><span className="founder-badge">Student-led</span><GraduationCap/><strong>Built to learn by helping.</strong></div>
+      <div><p className="eyebrow">Founder</p><h2>A student-led beginning.</h2><p className="large-copy">Project Econ was founded by a student interested in economics, behavioral economics, business, and helping the local community.</p><div className="founder-meta"><span><BookOpen/> Economics & behavioral economics</span><span><MapPin/> Cabarrus County, NC</span></div></div>
+    </Reveal></div></section>
+    <CallToAction/>
+  </>;
+}
