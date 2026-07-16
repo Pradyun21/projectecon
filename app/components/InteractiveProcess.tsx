@@ -1,18 +1,18 @@
 "use client";
 
-import { ArrowDown, BarChart3, Handshake, Lightbulb, MessageSquareText, Search, Wrench } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRef, useState } from "react";
 import { Reveal } from "./SiteShell";
 import { MOTION } from "./motion";
+import { EmojiGlyph } from "./EmojiGlyph";
 
 export const processSteps = [
-  { title: "Connect", short: "Start a local conversation", icon: Handshake, detail: "We connect with a local business or organization through a conversation, meeting, email, phone call, or text." },
-  { title: "Understand", short: "Find the real challenge", icon: Search, detail: "We learn about the challenge they are facing or identify a possible issue we notice." },
-  { title: "Choose", short: "Match one useful idea", icon: Lightbulb, detail: "We decide which economic or behavioral economic concept best fits the problem." },
-  { title: "Suggest", short: "Recommend a practical move", icon: MessageSquareText, detail: "We analyze the situation and recommend one practical strategy." },
-  { title: "Implement", short: "Put it into practice", icon: Wrench, detail: "We help the organization apply the strategy during a one-week time frame." },
-  { title: "Review", short: "Learn from what happened", icon: BarChart3, detail: "The organization reviews what happened and can contact us again if they want to continue working with Project Econ." },
+  { title: "Connect", short: "Start a local conversation", icon: "🤝", detail: "We connect with a local business or organization through a conversation, meeting, email, phone call, or text." },
+  { title: "Understand", short: "Find the real challenge", icon: "🔍", detail: "We learn about the challenge they are facing or identify a possible issue we notice." },
+  { title: "Choose", short: "Match one useful idea", icon: "💡", detail: "We decide which economic or behavioral economic concept best fits the problem." },
+  { title: "Suggest", short: "Recommend a practical move", icon: "💬", detail: "We analyze the situation and recommend one practical strategy." },
+  { title: "Implement", short: "Put it into practice", icon: "🔧", detail: "We help the organization apply the strategy during a one-week time frame." },
+  { title: "Review", short: "Learn from what happened", icon: "📈", detail: "The organization reviews what happened and can contact us again if they want to continue working with Project Econ." },
 ];
 
 export function InteractiveProcess() {
@@ -33,7 +33,6 @@ export function InteractiveProcess() {
         <div className="journey-track" aria-hidden="true"><motion.span animate={{ width: `${(active / (processSteps.length - 1)) * 100}%` }} transition={{ duration: MOTION.base, ease: MOTION.ease }}/></div>
         <div className="journey-nodes" role="tablist" aria-label="Project Econ process">
           {processSteps.map((step, index) => {
-            const Icon = step.icon;
             return <button ref={element => { tabs.current[index] = element; }} key={step.title} id={`journey-tab-${index}`} type="button" role="tab" aria-selected={active === index} aria-controls="journey-detail" tabIndex={active === index ? 0 : -1} className={active === index ? "active" : ""} onClick={() => setActive(index)} onKeyDown={event => {
               if (event.key === "ArrowRight" || event.key === "ArrowDown") { event.preventDefault(); moveTo(active + 1); }
               if (event.key === "ArrowLeft" || event.key === "ArrowUp") { event.preventDefault(); moveTo(active - 1); }
@@ -41,7 +40,7 @@ export function InteractiveProcess() {
               if (event.key === "End") { event.preventDefault(); moveTo(processSteps.length - 1); }
             }}>
               <span className="journey-number">{String(index + 1).padStart(2, "0")}</span>
-              <span className="journey-node"><Icon/></span>
+              <span className="journey-node"><EmojiGlyph emoji={step.icon}/></span>
               <span className="journey-label"><strong>{step.title}</strong><small>{step.short}</small></span>
             </button>;
           })}
@@ -56,16 +55,16 @@ export function InteractiveProcess() {
         </div>
       </div>
       <Reveal className="signature-visual">
-        <div><span className="signature-icon"><Lightbulb/></span><strong>Idea</strong><small>Choose one useful concept</small></div>
+        <div><span className="signature-icon"><EmojiGlyph emoji="💡"/></span><strong>Idea</strong><small>Choose one useful concept</small></div>
         <motion.span className="signature-flow" aria-hidden="true"><motion.i animate={{ x: ["-100%", "260%"] }} transition={{ duration: 2.8, repeat: Infinity, repeatDelay: 0.7, ease: "easeInOut" }}/></motion.span>
-        <div><span className="signature-icon"><Wrench/></span><strong>Experiment</strong><small>Try one practical change</small></div>
+        <div><span className="signature-icon"><EmojiGlyph emoji="🔧"/></span><strong>Experiment</strong><small>Try one practical change</small></div>
         <motion.span className="signature-flow" aria-hidden="true"><motion.i animate={{ x: ["-100%", "260%"] }} transition={{ duration: 2.8, delay: 0.55, repeat: Infinity, repeatDelay: 0.7, ease: "easeInOut" }}/></motion.span>
-        <div><span className="signature-icon"><BarChart3/></span><strong>Learning</strong><small>Observe and document</small></div>
+        <div><span className="signature-icon"><EmojiGlyph emoji="📈"/></span><strong>Learning</strong><small>Observe and document</small></div>
       </Reveal>
       <Reveal className="process-next-wrap">
-        <a className="process-next" href="#difference">
+        <a className="process-next" href="#difference" data-reading-delay="9000">
           <span><small>Continue exploring</small><strong>See why Project Econ is different</strong></span>
-          <i aria-hidden="true"><ArrowDown size={18}/></i>
+          <i aria-hidden="true"><EmojiGlyph emoji="⬇️"/></i>
         </a>
       </Reveal>
     </div>

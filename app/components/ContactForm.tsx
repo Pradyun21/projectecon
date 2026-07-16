@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowRight } from "lucide-react";
+import { EmojiGlyph } from "./EmojiGlyph";
 
 export function ContactForm() {
   const [notice, setNotice] = useState(false);
@@ -24,7 +24,7 @@ export function ContactForm() {
       <label>Email<input name="email" type="email" required autoComplete="email" placeholder="you@example.com"/></label>
       <label>Website URL <span>Optional</span><input name="website" type="url" autoComplete="url" placeholder="https://"/></label>
     </div>
-    <button className="button" type="submit">Start the conversation <ArrowRight size={18}/></button>
+    <button className="button" type="submit">Start the conversation <EmojiGlyph emoji="➡️"/></button>
     <p className="form-support-note">This preview form is not connected yet. No information is sent.</p>
     {notice && <div className="demo-notice" role="status"><strong>Everything looks ready.</strong><p>Your information has not been sent. Connect a form service before accepting submissions.</p></div>}
   </form>;
