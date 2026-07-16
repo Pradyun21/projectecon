@@ -1,6 +1,6 @@
 "use client";
 
-import { BarChart3, Handshake, Lightbulb, MessageSquareText, Search, Wrench } from "lucide-react";
+import { ArrowDown, BarChart3, Handshake, Lightbulb, MessageSquareText, Search, Wrench } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRef, useState } from "react";
 import { Reveal } from "./SiteShell";
@@ -61,6 +61,12 @@ export function InteractiveProcess() {
         <div><span className="signature-icon"><Wrench/></span><strong>Experiment</strong><small>Try one practical change</small></div>
         <motion.span className="signature-flow" aria-hidden="true"><motion.i animate={{ x: ["-100%", "260%"] }} transition={{ duration: 2.8, delay: 0.55, repeat: Infinity, repeatDelay: 0.7, ease: "easeInOut" }}/></motion.span>
         <div><span className="signature-icon"><BarChart3/></span><strong>Learning</strong><small>Observe and document</small></div>
+      </Reveal>
+      <Reveal className="process-next-wrap">
+        <a className="process-next" href="#difference">
+          <span><small>Continue exploring</small><strong>See why Project Econ is different</strong></span>
+          <i aria-hidden="true"><ArrowDown size={18}/></i>
+        </a>
       </Reveal>
     </div>
   </section>;

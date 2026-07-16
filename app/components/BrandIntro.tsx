@@ -1,12 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { MOTION } from "./motion";
+import { BrandLockup } from "./BrandLockup";
 
 const INTRO_KEY = "project-econ-intro-seen";
-const INTRO_DURATION = 2100;
+const INTRO_DURATION = 3550;
 
 type Target = { x: number; y: number; scale: number };
 
@@ -15,7 +15,7 @@ export function BrandIntro({ children }: { children: React.ReactNode }) {
   const [landing, setLanding] = useState(false);
   const [revealSite, setRevealSite] = useState(false);
   const [target, setTarget] = useState<Target>({ x: 0, y: 0, scale: 0.2 });
-  const logoStage = useRef<HTMLDivElement>(null);
+  const iconStage = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -29,17 +29,23 @@ export function BrandIntro({ children }: { children: React.ReactNode }) {
 
     document.documentElement.dataset.intro = "active";
     function measureTarget() {
-      const stage = logoStage.current?.getBoundingClientRect();
-      const navLogo = document.querySelector<HTMLElement>(".brand-full")?.getBoundingClientRect();
-      if (!stage || !navLogo) return;
-      const scale = navLogo.height / stage.height;
-      setTarget({ x: navLogo.left + navLogo.width / 2 - (stage.left + stage.width / 2), y: navLogo.top + navLogo.height / 2 - (stage.top + stage.height / 2), scale });
+      const stage = iconStage.current?.getBoundingClientRect();
+      const introIcon = iconStage.current?.querySelector<HTMLElement>(".brand-logo-art")?.getBoundingClientRect();
+      const navIcon = document.querySelector<HTMLElement>(".brand .brand-logo-art")?.getBoundingClientRect();
+      if (!stage || !introIcon || !navIcon) return;
+      const scale = navIcon.height / introIcon.height;
+      const stageCenterX = stage.left + stage.width / 2;
+      const stageCenterY = stage.top + stage.height / 2;
+      setTarget({
+        x: navIcon.left + navIcon.width / 2 - stageCenterX - scale * (introIcon.left + introIcon.width / 2 - stageCenterX),
+        y: navIcon.top + navIcon.height / 2 - stageCenterY - scale * (introIcon.top + introIcon.height / 2 - stageCenterY),
+        scale,
+      });
     }
 
     const frame = window.requestAnimationFrame(measureTarget);
     window.addEventListener("resize", measureTarget);
-    const siteTimer = window.setTimeout(() => setRevealSite(true), 900);
-    const landingTimer = window.setTimeout(() => { measureTarget(); setLanding(true); }, 910);
+    const landingTimer = window.setTimeout(() => { measureTarget(); setRevealSite(true); setLanding(true); }, 2450);
     const finishTimer = window.setTimeout(() => {
       window.sessionStorage.setItem(INTRO_KEY, "true");
       document.documentElement.removeAttribute("data-intro");
@@ -49,23 +55,27 @@ export function BrandIntro({ children }: { children: React.ReactNode }) {
     return () => {
       window.cancelAnimationFrame(frame);
       window.removeEventListener("resize", measureTarget);
-      window.clearTimeout(siteTimer); window.clearTimeout(landingTimer); window.clearTimeout(finishTimer);
+      [landingTimer, finishTimer].forEach(window.clearTimeout);
       document.documentElement.removeAttribute("data-intro");
     };
   }, []);
 
   return <>
-    <motion.div className="site-experience" initial={false} animate={{ opacity: revealSite ? 1 : 0 }} transition={{ duration: 0.82, ease: MOTION.ease }} aria-hidden={!revealSite}>
+    <motion.div className="site-experience" initial={false} animate={{ opacity: revealSite ? 1 : 0 }} transition={{ duration: 0.9, ease: MOTION.ease }} aria-hidden={!revealSite}>
       {children}
     </motion.div>
     <AnimatePresence>
-      {showIntro && <div className="brand-intro" aria-hidden="true">
-        <motion.div className="brand-intro-backdrop" initial={{ opacity: 1 }} animate={{ opacity: landing ? 0 : 1 }} transition={{ duration: 0.9, ease: MOTION.ease }}/>
-        <motion.div ref={logoStage} className="intro-drop-logo" initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, x: landing ? target.x : 0, y: landing ? target.y : 0, scale: landing ? target.scale : 1 }} transition={landing ? { duration: 1, ease: MOTION.ease } : { duration: 0.4, ease: MOTION.ease }}>
-          <motion.span className="intro-illumination" initial={{ opacity: 0, scale: 0.94 }} animate={landing ? { opacity: 0, scale: 0.88 } : { opacity: [0, 0, 0.42], scale: [0.94, 0.94, 1.01] }} transition={landing ? { duration: 0.9, ease: MOTION.ease } : { duration: 0.9, times: [0, 0.56, 1], ease: "easeOut" }}/>
-          <motion.span className="intro-logo-sharp" initial={{ opacity: 0, filter: "brightness(1)" }} animate={landing ? { opacity: 1, filter: "brightness(1)" } : { opacity: [0, 1, 1], filter: ["brightness(1)", "brightness(1)", "brightness(1.045)"] }} transition={landing ? { duration: 0.9, ease: MOTION.ease } : { duration: 0.9, times: [0, 0.44, 1], ease: "easeOut" }}><Image className="intro-complete-logo" src="/project-econ.png" alt="" width={560} height={320} priority unoptimized/></motion.span>
+      {showIntro && <motion.div className="brand-intro" aria-hidden="true" exit={{ opacity: 0 }} transition={{ duration: 0.25 }}>
+        <motion.div className="brand-intro-backdrop" animate={{ opacity: landing ? 0 : 1 }} transition={{ duration: 1, ease: MOTION.ease }}/>
+        <svg className="intro-environment" viewBox="0 0 1440 900" preserveAspectRatio="none">
+          <path d="M-120 90C250 5 490 170 800 125S1210 20 1560 175L1560 320C1190 190 1040 290 790 280S250 125-120 245Z"/>
+          <path d="M1560 120C1250 150 1100 330 840 420S350 470-120 700L-120 850C380 630 650 650 920 545S1270 335 1560 315Z"/>
+          <path d="M310-100C380 150 520 300 700 455S990 735 1160 980L960 980C800 790 585 650 465 500S150 150 85-100Z"/>
+        </svg>
+        <motion.div ref={iconStage} className="intro-lockup-stage" initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, x: landing ? target.x : 0, y: landing ? target.y : 0, scale: landing ? target.scale : 1 }} transition={landing ? { duration: 1, ease: MOTION.ease } : { duration: 0.42, ease: MOTION.ease }}>
+          <BrandLockup className="brand-lockup-intro" />
         </motion.div>
-      </div>}
+      </motion.div>}
     </AnimatePresence>
   </>;
 }

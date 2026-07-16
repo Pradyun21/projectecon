@@ -1,16 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { BrandIntro } from "./BrandIntro";
+import { BrandLockup } from "./BrandLockup";
 import { MOTION } from "./motion";
 
 const links = [{ href: "/", label: "Home" }, { href: "/our-work", label: "Projects" }, { href: "/about", label: "About" }];
 const workWithUs = { href: "/work-with-us", label: "Work With Us" };
+
 const glassRibbonPaths = [
   { tone: "pale whisper", body: "M-180 70C210-10 510 120 820 90S1220 0 1620 125L1620 300C1225 170 1080 280 805 275S210 115-180 260Z", edge: "M-180 70C210-10 510 120 820 90S1220 0 1620 125" },
   { tone: "blue whisper", body: "M1430-130C1320 120 1310 340 1195 550S900 900 760 1140L540 1140C685 820 925 650 1025 475S1130 105 1220-130Z", edge: "M1430-130C1320 120 1310 340 1195 550S900 900 760 1140" },
@@ -37,13 +38,13 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", update);
   }, []);
   return <header className={`nav-wrap ${scrolled ? "is-scrolled" : ""}`}><nav className="nav container" aria-label="Main navigation">
-    <Link href="/" className="brand" aria-label="Project Econ home"><Image className="brand-full" src="/project-econ.png" alt="Project Econ" width={196} height={112} priority unoptimized /><Image className="brand-mark" src="/project-econ-p.png" alt="" width={54} height={54} priority unoptimized /></Link>
+    <Link href="/" className="brand" aria-label="Project Econ home"><BrandLockup /></Link>
     <div className="nav-links">{links.map(l => <Link key={l.href} className={pathname === l.href ? "active" : ""} href={l.href}>{l.label}</Link>)}<Link className={`button button-small ${pathname === workWithUs.href ? "is-current" : ""}`} href={workWithUs.href}>{workWithUs.label} <ArrowUpRight size={16}/></Link></div>
     <button className="menu-button" onClick={() => setOpen(v => !v)} aria-expanded={open} aria-label="Toggle navigation">{open ? <X/> : <Menu/>}</button>
   </nav><AnimatePresence>{open && <motion.div className="mobile-menu" initial={{opacity:0,y:-12}} animate={{opacity:1,y:0}} exit={{opacity:0,y:-12}} transition={{ duration: MOTION.base, ease: MOTION.ease }}>{links.map(l => <Link key={l.href} className={pathname === l.href ? "active" : ""} href={l.href} onClick={() => setOpen(false)}>{l.label}</Link>)}<Link className="button" href={workWithUs.href} onClick={() => setOpen(false)}>{workWithUs.label}</Link></motion.div>}</AnimatePresence></header>
 }
 
-export function Footer() { return <footer><div className="container footer-grid"><div><Link href="/" className="footer-brand" aria-label="Project Econ home"><Image src="/project-econ-p.png" alt="" width={58} height={58} unoptimized/><span>Project <strong>Econ</strong></span></Link><p>A student-led initiative applying economics to real local problems—one focused concept at a time.</p></div><div><h3>Explore</h3>{[...links, workWithUs].map(l => <Link key={l.href} href={l.href}>{l.label}</Link>)}</div><div><h3>Local to</h3><p>Cabarrus County,<br/>North Carolina</p><Link className="footer-cta" href={workWithUs.href}>Start a conversation <ArrowUpRight size={15}/></Link></div></div><div className="container footer-bottom"><span>© {new Date().getFullYear()} Project Econ</span><p>Project Econ provides free, student-led, educational recommendations. Results are not guaranteed, and each business or organization is responsible for its own decisions.</p></div></footer> }
+export function Footer() { return <footer><div className="container footer-grid"><div><Link href="/" className="footer-brand" aria-label="Project Econ home"><BrandLockup /></Link><p>A student-led initiative applying economics to real local problems—one focused concept at a time.</p></div><div><h3>Explore</h3>{[...links, workWithUs].map(l => <Link key={l.href} href={l.href}>{l.label}</Link>)}</div><div><h3>Local to</h3><p>Cabarrus County,<br/>North Carolina</p><Link className="footer-cta" href={workWithUs.href}>Start a conversation <ArrowUpRight size={15}/></Link></div></div><div className="container footer-bottom"><span>© {new Date().getFullYear()} Project Econ</span><p>Project Econ provides free, student-led, educational recommendations. Results are not guaranteed, and each business or organization is responsible for its own decisions.</p></div></footer> }
 
 function AmbientBackground() {
   return <div className="ambient-background" aria-hidden="true">
