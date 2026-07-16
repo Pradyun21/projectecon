@@ -4,15 +4,13 @@ import Link from "next/link";
 import { ArrowDown, ArrowRight, BadgeDollarSign, CalendarX2, CircleDollarSign, Compass, FlaskConical, Lightbulb, MousePointerClick, NotebookTabs, Percent, Repeat2, ShieldCheck, SlidersHorizontal, Users } from "lucide-react";
 import { motion } from "framer-motion";
 import { CallToAction, Reveal } from "./SiteShell";
-import { ExpandableInfoCard, ExplorationCard, GradientShapes } from "./InteractiveCards";
+import { ExpandableInfoCard, ExplorationCard } from "./InteractiveCards";
 import { InteractiveProcess } from "./InteractiveProcess";
 import { MOTION } from "./motion";
 
 export function HeroSection() {
   return <section className="hero">
-    <div className="hero-gradient"/><div className="hero-grid-bg"/><GradientShapes variant="navy"/>
-    <motion.div className="hero-light hero-light-one" animate={{ x: [0, 16, 0], y: [0, -10, 0] }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}/>
-    <motion.div className="hero-light hero-light-two" animate={{ x: [0, -12, 0], y: [0, 12, 0] }} transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}/>
+    <div className="hero-gradient"/>
     <div className="container hero-layout"><motion.div className="hero-copy" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: MOTION.reveal, ease: MOTION.ease }}>
       <p className="eyebrow"><span/>Free • Student-led • Cabarrus County</p>
       <h1>Practical economics.<br/><em>Local impact.</em></h1>
@@ -23,7 +21,7 @@ export function HeroSection() {
 }
 
 export function DifferenceSection() {
-  return <section className="section community-section"><GradientShapes variant="navy"/><div className="container">
+  return <section className="section community-section"><div className="container">
     <Reveal className="section-head"><p className="eyebrow">Why Project Econ is different</p><h2>Small enough to try. Clear enough to learn from.</h2><p>Open a card to see the principles behind every project.</p></Reveal>
     <Reveal className="expand-grid">
       <ExpandableInfoCard icon={CircleDollarSign} title="Free by design" summary="No fee or obligation" detail="Project Econ is a student-led learning initiative. Organizations contribute context and feedback, never a project fee."/>

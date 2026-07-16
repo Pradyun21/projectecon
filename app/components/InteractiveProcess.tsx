@@ -3,7 +3,6 @@
 import { BarChart3, Handshake, Lightbulb, MessageSquareText, Search, Wrench } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRef, useState } from "react";
-import { GradientShapes } from "./InteractiveCards";
 import { Reveal } from "./SiteShell";
 import { MOTION } from "./motion";
 
@@ -28,7 +27,6 @@ export function InteractiveProcess() {
   }
 
   return <section id="process" className="section process-section">
-    <GradientShapes variant="navy"/>
     <div className="container process-container">
       <Reveal className="section-head"><p className="eyebrow">How it works</p><h2>From a real problem to a tested next step.</h2><p>Choose any point in the journey to see how one focused idea moves forward.</p></Reveal>
       <div className="journey-shell">
