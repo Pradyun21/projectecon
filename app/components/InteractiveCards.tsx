@@ -51,8 +51,8 @@ export function GradientShapes({ variant = "blue" }: { variant?: "blue" | "navy"
 
 export function AboutPrincipleCards() {
   return <div className="expand-grid">
-    <ExpandableInfoCard icon="👁️" title="A useful local library" summary="The long-term vision" detail="Build a clear collection of small local case studies that makes applied economics easier for others to understand."/>
-    <ExpandableInfoCard icon="🤝" title="Respect the partner" summary="Listen before recommending" detail="Treat every organization’s context, time, and decisions with care. A suggestion should fit the situation—not the other way around."/>
-    <ExpandableInfoCard icon="📖" title="Document the truth" summary="Learning over perfect results" detail="Share what was tried and what happened without overstating certainty. Useful learning includes unexpected and inconclusive outcomes."/>
+    <ExpandableInfoCard icon="📖" title="A practical discipline" summary="More than economic theory" detail="Smith and Keynes helped shape the field, but economics is also a practical tool for understanding incentives, behavior, tradeoffs, and business performance."/>
+    <ExpandableInfoCard icon="🤝" title="A growing local network" summary="Empower businesses through partnership" detail="Project Econ aims to empower local businesses while building a growing network of government institutions, support organizations, and entrepreneurs."/>
+    <ExpandableInfoCard icon="📈" title="A replicable model" summary="Begin locally, expand responsibly" detail="The long-term vision is a growing partnership model that can be replicated across the Tar Heel State and beyond."/>
   </div>;
 }

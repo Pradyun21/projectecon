@@ -17,7 +17,7 @@ export function ContactForm() {
   }
 
   return <form className="contact-form" onSubmit={submit}>
-    <div className="form-heading"><p className="eyebrow">Under one minute</p><h2>Start the conversation.</h2><p>Share the basics now. We can learn about the challenge together later.</p></div>
+    <div className="form-heading"><p className="eyebrow">Under one minute</p><h2>Start the conversation.</h2><p>Share the basics. We can learn about the organization and available data in a follow-up conversation.</p></div>
     <div className="field-grid">
       <label>Contact name<input name="name" required autoComplete="name" placeholder="Your name"/></label>
       <label>Business or organization name<input name="organization" required autoComplete="organization" placeholder="Organization name"/></label>

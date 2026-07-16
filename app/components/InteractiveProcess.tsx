@@ -7,12 +7,11 @@ import { MOTION } from "./motion";
 import { EmojiGlyph } from "./EmojiGlyph";
 
 export const processSteps = [
-  { title: "Connect", short: "Start a local conversation", icon: "🤝", detail: "We connect with a local business or organization through a conversation, meeting, email, phone call, or text." },
-  { title: "Understand", short: "Find the real challenge", icon: "🔍", detail: "We learn about the challenge they are facing or identify a possible issue we notice." },
-  { title: "Choose", short: "Match one useful idea", icon: "💡", detail: "We decide which economic or behavioral economic concept best fits the problem." },
-  { title: "Suggest", short: "Recommend a practical move", icon: "💬", detail: "We analyze the situation and recommend one practical strategy." },
-  { title: "Implement", short: "Put it into practice", icon: "🔧", detail: "We help the organization apply the strategy during a one-week time frame." },
-  { title: "Review", short: "Learn from what happened", icon: "📈", detail: "The organization reviews what happened and can contact us again if they want to continue working with Project Econ." },
+  { title: "Community Partnerships", short: "Connect through local institutions", icon: "🤝", detail: "Connect through local government institutions and small business support organizations to reach entrepreneurs." },
+  { title: "Business Assessment", short: "Understand the organization", icon: "🔍", detail: "Spend one week with each business to understand operations, customer behavior, marketing, and financial performance." },
+  { title: "Data Analytics", short: "Identify trends and opportunities", icon: "📈", detail: "Collect and analyze business data using statistical and analytical tools such as Tableau and SQL to identify trends, bottlenecks, and opportunities." },
+  { title: "Economic Recommendations", short: "Turn analysis into action", icon: "💡", detail: "Develop customized recommendations grounded in microeconomic principles and behavioral economics." },
+  { title: "Long-Term Evaluation", short: "Measure results over time", icon: "🔁", detail: "Track outcomes, continue monitoring previous businesses, and refine future analyses over time." },
 ];
 
 export function InteractiveProcess() {
@@ -28,7 +27,7 @@ export function InteractiveProcess() {
 
   return <section id="process" className="section process-section">
     <div className="container process-container">
-      <Reveal className="section-head"><p className="eyebrow">How it works</p><h2>From a real problem to a tested next step.</h2><p>Choose any point in the journey to see how one focused idea moves forward.</p></Reveal>
+      <Reveal className="section-head"><p className="eyebrow">How it works</p><h2>From community partnership to long-term evaluation.</h2><p>Explore the five stages used to understand a business, analyze its data, and develop practical economic recommendations.</p></Reveal>
       <div className="journey-shell">
         <div className="journey-track" aria-hidden="true"><motion.span animate={{ width: `${(active / (processSteps.length - 1)) * 100}%` }} transition={{ duration: MOTION.base, ease: MOTION.ease }}/></div>
         <div className="journey-nodes" role="tablist" aria-label="Project Econ process">
@@ -55,11 +54,11 @@ export function InteractiveProcess() {
         </div>
       </div>
       <Reveal className="signature-visual">
-        <div><span className="signature-icon"><EmojiGlyph emoji="💡"/></span><strong>Idea</strong><small>Choose one useful concept</small></div>
+        <div><span className="signature-icon"><EmojiGlyph emoji="📈"/></span><strong>Analysis</strong><small>Identify trends and bottlenecks</small></div>
         <motion.span className="signature-flow" aria-hidden="true"><motion.i animate={{ x: ["-100%", "260%"] }} transition={{ duration: 2.8, repeat: Infinity, repeatDelay: 0.7, ease: "easeInOut" }}/></motion.span>
-        <div><span className="signature-icon"><EmojiGlyph emoji="🔧"/></span><strong>Experiment</strong><small>Try one practical change</small></div>
+        <div><span className="signature-icon"><EmojiGlyph emoji="💡"/></span><strong>Recommendation</strong><small>Apply economic principles</small></div>
         <motion.span className="signature-flow" aria-hidden="true"><motion.i animate={{ x: ["-100%", "260%"] }} transition={{ duration: 2.8, delay: 0.55, repeat: Infinity, repeatDelay: 0.7, ease: "easeInOut" }}/></motion.span>
-        <div><span className="signature-icon"><EmojiGlyph emoji="📈"/></span><strong>Learning</strong><small>Observe and document</small></div>
+        <div><span className="signature-icon"><EmojiGlyph emoji="🔁"/></span><strong>Evaluation</strong><small>Track performance over time</small></div>
       </Reveal>
       <Reveal className="process-next-wrap">
         <a className="process-next" href="#difference" data-reading-delay="9000">

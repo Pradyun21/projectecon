@@ -13,8 +13,8 @@ export function HeroSection() {
     <div className="hero-gradient"/>
     <div className="container hero-layout"><motion.div className="hero-copy" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: MOTION.reveal, ease: MOTION.ease }}>
       <p className="eyebrow"><span/>Free • Student-led • Cabarrus County</p>
-      <h1>Practical economics.<br/><em>Local impact.</em></h1>
-      <p className="lead">Project Econ helps small businesses and organizations solve real problems by applying one focused economic concept at a time.</p>
+      <h1>Project <em>Econ</em></h1>
+      <p className="lead">Neoclassical models taught in the classroom rarely capture how a small business actually operates. Project Econ closes that gap through economic analysis, behavioral insights, and performance tracking.</p>
       <a className="hero-prompt" href="#process" data-reading-delay="4500"><span className="hero-scroll-circle"><EmojiGlyph emoji="⬇️"/></span><span>Scroll to explore</span></a>
     </motion.div></div><div className="hero-fade"/>
   </section>;
@@ -22,11 +22,11 @@ export function HeroSection() {
 
 export function DifferenceSection() {
   return <section id="difference" className="section community-section"><div className="container">
-    <Reveal className="section-head"><p className="eyebrow">Why Project Econ is different</p><h2>Small enough to try. Clear enough to learn from.</h2><p>Open a card to see the principles behind every project.</p></Reveal>
+    <Reveal className="section-head"><p className="eyebrow">The problem</p><h2>Small businesses rarely have access to individualized economic analysis.</h2><p>Open each card to see why the gap between economic theory and business decision-making matters.</p></Reveal>
     <Reveal className="expand-grid">
-      <ExpandableInfoCard icon="💵" title="Free by design" summary="No fee or obligation" detail="Project Econ is a student-led learning initiative. Organizations contribute context and feedback, never a project fee."/>
-      <ExpandableInfoCard icon="🧪" title="Experiment-sized" summary="One concept, one next step" detail="A narrow scope keeps each recommendation realistic to implement and makes the outcome easier to observe."/>
-      <ExpandableInfoCard icon="📖" title="Openly documented" summary="Process and learning, not promises" detail="Completed work will explain the challenge, idea, implementation, result, and lesson—including what did not work."/>
+      <ExpandableInfoCard icon="💵" title="Decisions without data" summary="Intuition often fills the gap" detail="Small businesses often decide on intuition, not data, when considering customers, marketing, pricing, and performance."/>
+      <ExpandableInfoCard icon="🏢" title="Unequal access" summary="Dedicated analytics teams are costly" detail="Only large firms can typically afford dedicated analytics teams. Small businesses rarely have access to the same tools."/>
+      <ExpandableInfoCard icon="📖" title="Individualized analysis" summary="General support cannot answer every question" detail="Small business support organizations provide valuable resources but often lack the capacity for individualized economic analysis."/>
     </Reveal>
     <Reveal className="process-next-wrap">
       <a className="process-next" href="#exploration" data-reading-delay="7000"><span><small>Keep exploring</small><strong>See the questions we could investigate</strong></span><i aria-hidden="true"><EmojiGlyph emoji="⬇️"/></i></a>
@@ -36,7 +36,7 @@ export function DifferenceSection() {
 
 export function ExplorationSection() {
   return <section id="exploration" className="section future-section"><div className="container">
-    <Reveal className="exploration-head"><div><p className="eyebrow">Areas we’re exploring</p><h2>Real questions, viewed through an economic lens.</h2></div><div><p>These are examples of the decisions a future project could investigate—not a fixed menu.</p><Link className="text-cta" href="/our-work">View Projects <EmojiGlyph emoji="➡️"/></Link></div></Reveal>
+    <Reveal className="exploration-head"><div><p className="eyebrow">Areas we’re exploring</p><h2>Real questions, viewed through an economic lens.</h2></div><div><p>These are examples of the decisions a future project could investigate, not a fixed menu.</p><Link className="text-cta" href="/our-work">View Projects <EmojiGlyph emoji="➡️"/></Link></div></Reveal>
     <Reveal className="exploration-grid">
       <ExplorationCard icon="👆" title="Customer decisions" summary="How people compare and choose" problem="Customers view a service but rarely take the next step." question="Is the decision unclear or overloaded?" approach="Compare one simpler path with the current experience."/>
       <ExplorationCard icon="💰" title="Pricing" summary="How value is understood" problem="Customers hesitate even when the offer is competitive." question="How is the reference price shaping value?" approach="Test a clearer anchor, bundle, or price presentation."/>

@@ -3,21 +3,21 @@ import { AboutPrincipleCards } from "../components/InteractiveCards";
 import { EmojiGlyph } from "../components/EmojiGlyph";
 import { PageIntro, Reveal } from "../components/SiteShell";
 
-export const metadata: Metadata = { title: "About", description: "Meet the student behind Project Econ and learn why the initiative exists." };
+export const metadata: Metadata = { title: "About", description: "Learn how Project Econ bridges economic theory and real-world business decisions." };
 
 export default function About() {
   return <>
-    <PageIntro eyebrow="About" title="Meet the person behind Project Econ." text="A student-led initiative built from curiosity about how economic ideas work in real community settings."/>
+    <PageIntro eyebrow="About" title="Economics should be practical." text="Project Econ helps organizations make data-driven decisions through economic analysis, behavioral insights, and performance tracking."/>
     <section id="about-founder" className="section founder-section founder-first"><div className="container"><Reveal className="founder-card">
       <div className="founder-placeholder"><span className="founder-badge">Founder</span><EmojiGlyph emoji="🎓"/><strong>Learning by helping.</strong></div>
-      <div><p className="eyebrow">Who is behind it</p><h2>A student-led beginning.</h2><p className="large-copy">Project Econ was founded by a student interested in economics, behavioral economics, business, and the local community.</p><p>The initiative creates a way to study those ideas with care, responsibility, and real-world context.</p><div className="founder-meta"><span><EmojiGlyph emoji="📚"/> Economics & behavioral economics</span><span><EmojiGlyph emoji="📍"/> Cabarrus County, NC</span></div></div>
+      <div><p className="eyebrow">Who is behind it</p><h2>A student-led beginning.</h2><p className="large-copy">Project Econ was founded by a student interested in economics, behavioral economics, business, and the local community.</p><p>The initiative applies those fields to real decisions while building experience in economic analysis and community partnership.</p><div className="founder-meta"><span><EmojiGlyph emoji="📚"/> Economics & behavioral economics</span><span><EmojiGlyph emoji="📍"/> Cabarrus County, NC</span></div></div>
     </Reveal><Reveal className="process-next-wrap"><a className="process-next" href="#about-story" data-reading-delay="7000"><span><small>Continue</small><strong>See why Project Econ exists</strong></span><i aria-hidden="true"><EmojiGlyph emoji="⬇️"/></i></a></Reveal></div></section>
     <section id="about-story" className="section about-story"><div className="container about-story-layout">
-      <Reveal><p className="eyebrow">Why it exists</p><h2>Curiosity needs somewhere practical to go.</h2><p>Classroom concepts become clearer when they meet genuine constraints, decisions, and feedback. Project Econ creates that bridge while giving local organizations thoughtful attention.</p></Reveal>
-      <Reveal className="about-insight"><EmojiGlyph emoji="🔍"/><p>“Start with the real question, then find the economic idea that helps explain it.”</p></Reveal>
+      <Reveal><p className="eyebrow">Our mission</p><h2>Bridge the gap between theory and practice.</h2><p>Economics is often viewed as lacking real-world application. Traditional models taught in schools provide useful theory, but they often fail to represent the challenges faced by small businesses.</p><p>Project Econ bridges that gap by helping organizations make data-driven decisions through economic analysis, behavioral insights, and performance tracking.</p></Reveal>
+      <Reveal className="about-insight"><EmojiGlyph emoji="🔍"/><p>Economic theory becomes practical when it is applied to the operations, customers, and performance of a real organization.</p></Reveal>
     </div><div className="container"><Reveal className="process-next-wrap"><a className="process-next" href="#about-principles" data-reading-delay="6500"><span><small>Keep exploring</small><strong>Discover the vision and values</strong></span><i aria-hidden="true"><EmojiGlyph emoji="⬇️"/></i></a></Reveal></div></section>
     <section id="about-principles" className="section about-principles"><div className="container">
-      <Reveal className="section-head"><p className="eyebrow">Vision and values</p><h2>Grow through useful, honest work.</h2><p>Open each principle to see what guides the initiative.</p></Reveal>
+      <Reveal className="section-head"><p className="eyebrow">Our vision</p><h2>Economics is much more than theory.</h2><p>Open each card to see how Project Econ can grow from local analysis into a broader partnership model.</p></Reveal>
       <Reveal><AboutPrincipleCards/></Reveal>
     </div></section>
   </>;

@@ -3,13 +3,13 @@ import { ContactForm } from "../components/ContactForm";
 import { EmojiGlyph } from "../components/EmojiGlyph";
 import { PageIntro, Reveal } from "../components/SiteShell";
 
-export const metadata: Metadata = { title: "Work With Us", description: "Start a simple conversation with Project Econ about your Cabarrus County business or organization." };
+export const metadata: Metadata = { title: "Work With Us", description: "Explore whether economic analysis can provide useful insights for your organization." };
 
 export default function WorkWithUs() {
   return <>
-    <PageIntro prominent eyebrow="Work with us" title="Let’s explore one challenge." text="You do not need to know which economic concept fits. Share the basics and we’ll begin by listening."/>
+    <PageIntro prominent eyebrow="Work with us" title="Begin with the organization, not the theory." text="You do not need economic expertise. Project Econ will learn about your organization, analyze available data, and determine whether economic analysis can provide useful insights."/>
     <section className="section contact-section"><div className="container contact-layout">
-      <Reveal><div className="contact-copy"><p className="eyebrow">What to expect</p><h2>Easy to begin. No pressure attached.</h2><p>We may follow up to understand the situation better. There is no cost and no obligation.</p><ul><li><EmojiGlyph emoji="💬"/> We listen before suggesting anything.</li><li><EmojiGlyph emoji="📍"/> We focus on Cabarrus County organizations.</li><li><EmojiGlyph emoji="⏱️"/> The form takes less than one minute.</li></ul><div className="disclaimer"><strong>A clear note</strong><p>Project Econ is student-led. We provide educational recommendations and cannot guarantee results.</p></div></div></Reveal>
+      <Reveal><div className="contact-copy"><p className="eyebrow">What to expect</p><h2>Individualized analysis begins with context.</h2><p>We may follow up to understand operations, customer behavior, marketing, financial performance, and the data currently available.</p><ul><li><EmojiGlyph emoji="💬"/> We learn about the organization before making recommendations.</li><li><EmojiGlyph emoji="📍"/> We build community partnerships in Cabarrus County.</li><li><EmojiGlyph emoji="⏱️"/> The initial form takes less than one minute.</li></ul><div className="disclaimer"><strong>A clear note</strong><p>Project Econ is student-led. Recommendations are educational, grounded in available data, and cannot guarantee results.</p></div></div></Reveal>
       <Reveal><ContactForm/></Reveal>
     </div></section>
   </>;

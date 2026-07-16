@@ -11,7 +11,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const host = incoming.get("x-forwarded-host") ?? incoming.get("host") ?? "projectecon.org";
   const protocol = incoming.get("x-forwarded-proto") ?? (host.startsWith("localhost") ? "http" : "https");
   const origin = `${protocol}://${host}`;
-  const description = "A free, student-led initiative helping Cabarrus County organizations apply economics to real problems.";
+  const description = "A student-led initiative bridging economic theory and real-world business decisions through data-driven analysis and behavioral insights.";
   return {
     title: { default: "Project Econ | Practical Economics. Local Impact.", template: "%s | Project Econ" },
     description,

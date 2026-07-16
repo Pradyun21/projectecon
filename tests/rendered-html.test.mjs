@@ -2,11 +2,11 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 const routes = [
-  ["/", "Practical economics", "Free by design"],
-  ["/our-work", "Projects coming soon", "first businesses and organizations"],
-  ["/about", "Meet the person behind Project Econ", "student-led beginning"],
-  ["/work-with-us", "Let’s explore one challenge", "Under one minute"],
-  ["/contact", "Let’s explore one challenge", "Under one minute"],
+  ["/", "Practical economics", "Decisions without data"],
+  ["/our-work", "Projects coming soon", "building community partnerships"],
+  ["/about", "Economics should be practical", "Bridge the gap between theory and practice"],
+  ["/work-with-us", "Begin with the organization", "Under one minute"],
+  ["/contact", "Begin with the organization", "Under one minute"],
 ];
 
 async function render(path) {
