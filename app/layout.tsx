@@ -5,17 +5,18 @@ import "./globals.css";
 
 const geist = Geist({variable:"--font-geist",subsets:["latin"]});
 const mono = Geist_Mono({variable:"--font-mono",subsets:["latin"]});
-const description = "We love John Maynard Keynes.";
+const title = "We love John Maynard Keynes";
+const description = "We love Keynesian economics.";
 const socialImage = "https://projectecon.org/opengraph-image.png";
 const twitterImage = "https://projectecon.org/twitter-image.png";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://projectecon.org"),
-  title: { default: "Project Econ", template: "%s | Project Econ" },
+  title: { default: title, template: "%s | Project Econ" },
   description,
   icons: { icon: "/project-econ-pe-logo.png", shortcut: "/project-econ-pe-logo.png" },
   openGraph: {
-    title: "Project Econ",
+    title,
     description,
     url: "https://projectecon.org",
     siteName: "Project Econ",
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Project Econ",
+    title,
     description,
     images: [twitterImage],
   },
