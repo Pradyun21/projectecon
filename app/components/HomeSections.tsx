@@ -12,6 +12,7 @@ export function HeroSection() {
   return <section className="hero">
     <div className="hero-gradient"/>
     <div className="container hero-layout"><motion.div className="hero-copy" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: MOTION.reveal, ease: MOTION.ease }}>
+      <p className="hero-principle">One Week, One Business, One Principle</p>
       <h1>Project <em>Econ</em></h1>
       <p className="lead">Neoclassical models taught in the classroom rarely capture how a small business actually operates. Project Econ closes that gap through economic analysis, behavioral insights, and performance tracking.</p>
       <a className="hero-prompt" href="#process" data-reading-delay="4500"><span className="hero-scroll-circle"><EmojiGlyph emoji="⬇️"/></span><span>Scroll to explore</span></a>
