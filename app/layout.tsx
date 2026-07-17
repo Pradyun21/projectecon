@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { SiteShell } from "./components/SiteShell";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
 const geist = Geist({variable:"--font-geist",subsets:["latin"]});
@@ -29,4 +30,4 @@ export const metadata: Metadata = {
   },
 };
 export const viewport: Viewport = { colorScheme: "dark", themeColor: "#06182e" };
-export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="en" style={{colorScheme:"dark"}}><body className={`${geist.variable} ${mono.variable}`}><SiteShell>{children}</SiteShell></body></html>}
+export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="en" style={{colorScheme:"dark"}}><body className={`${geist.variable} ${mono.variable}`}><SiteShell>{children}</SiteShell><SpeedInsights /></body></html>}
