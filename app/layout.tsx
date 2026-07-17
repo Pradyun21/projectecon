@@ -5,8 +5,8 @@ import "./globals.css";
 
 const geist = Geist({variable:"--font-geist",subsets:["latin"]});
 const mono = Geist_Mono({variable:"--font-mono",subsets:["latin"]});
-const title = "We love John Maynard Keynes";
-const description = "We love Keynesian economics.";
+const title = "Project Econ";
+const description = "We love John Maynard Keynes.";
 const socialImage = "https://projectecon.org/opengraph-image.png";
 const twitterImage = "https://projectecon.org/twitter-image.png";
 
