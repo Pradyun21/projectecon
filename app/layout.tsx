@@ -5,8 +5,9 @@ import "./globals.css";
 
 const geist = Geist({variable:"--font-geist",subsets:["latin"]});
 const mono = Geist_Mono({variable:"--font-mono",subsets:["latin"]});
-const description = "Helping Small Buisnesses with Economics";
+const description = "We love John Maynard Keynes.";
 const socialImage = "https://projectecon.org/opengraph-image.png";
+const twitterImage = "https://projectecon.org/twitter-image.png";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://projectecon.org"),
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Project Econ",
     description,
-    images: [socialImage],
+    images: [twitterImage],
   },
 };
 export const viewport: Viewport = { colorScheme: "dark", themeColor: "#06182e" };
