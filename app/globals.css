@@ -389,15 +389,22 @@ p { line-height: 1.68; }
 .contact-layout { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: start; gap: var(--grid-gap); }
 .contact-layout > :first-child { grid-column: 1 / span 4; }
 .contact-layout > :last-child { grid-column: 6 / span 7; }
-.contact-copy { position: sticky; top: 118px; padding: var(--space-4) var(--space-3) var(--space-3); }
-.contact-copy .eyebrow { margin-bottom: var(--space-3); }
-.contact-copy h2 { text-align: center; }
-.contact-copy > p { color: var(--color-muted); }
-.contact-copy ul { margin: var(--space-4) 0; padding: 0; list-style: none; }
+.contact-copy { position: sticky; top: 118px; }
+.contact-copy > p, .contact-details > p { color: var(--color-muted); }
+.contact-copy ul { margin: 0; padding: 0; list-style: none; }
 .contact-copy li { display: flex; align-items: center; gap: 12px; margin: var(--space-2) 0; font-weight: 650; }
 .contact-copy li svg { width: 19px; color: var(--color-blue); }
 .disclaimer { padding: var(--space-3); border: 1px solid var(--color-line); border-left: 3px solid var(--color-blue); border-radius: var(--radius-sm); background: var(--color-blue-wash); }
 .disclaimer p { margin: 8px 0 0; color: var(--color-muted); font-size: 0.875rem; }
+
+@media (min-width: 761px) {
+  .contact-copy { display: flex; padding: var(--space-4) var(--space-3); flex-direction: column; gap: var(--space-3); }
+  .contact-copy .eyebrow, .contact-copy h2 { margin: 0; }
+  .contact-copy h2 { max-width: 100%; font-size: clamp(2.25rem, 2.8vw, 2.75rem); line-height: 1.04; text-align: center; }
+  .contact-details { display: grid; gap: var(--space-2); }
+  .contact-details > p { margin: 0; }
+  .disclaimer { margin: 0; }
+}
 .contact-form { display: grid; gap: var(--space-3); padding: var(--space-6); border: 1px solid var(--color-line); border-radius: var(--radius-lg); background: var(--glass-fill-strong); box-shadow: var(--shadow-md); }
 .form-heading { padding-bottom: var(--space-3); border-bottom: 1px solid var(--color-line); }
 .form-heading h2 { margin-bottom: var(--space-1); font-size: clamp(2rem, 4vw, 3.5rem); }
