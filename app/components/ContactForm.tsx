@@ -50,12 +50,13 @@ export function ContactForm() {
   }
 
   return <form className="contact-form" onSubmit={submit} noValidate={false}>
-    <div className="form-heading"><p className="eyebrow">Under one minute</p><h2>Start the conversation.</h2><p>Share the basics. We can learn about the organization and available data in a follow-up conversation.</p></div>
+    <div className="form-heading"><h2>Start the conversation.</h2><p>Share the basics. We can learn about the organization and available data in a follow-up conversation.</p></div>
     <div className="field-grid">
       <label>Contact name<input name="name" required maxLength={100} autoComplete="name" placeholder="Your name" aria-invalid={Boolean(fieldErrors.name)}/>{fieldErrors.name && <span className="field-error">{fieldErrors.name}</span>}</label>
       <label>Business or organization name<input name="organization" required maxLength={160} autoComplete="organization" placeholder="Organization name" aria-invalid={Boolean(fieldErrors.organization)}/>{fieldErrors.organization && <span className="field-error">{fieldErrors.organization}</span>}</label>
       <label>Email<input name="email" type="email" required maxLength={254} autoComplete="email" placeholder="you@example.com" aria-invalid={Boolean(fieldErrors.email)}/>{fieldErrors.email && <span className="field-error">{fieldErrors.email}</span>}</label>
       <label>Website URL <span>Optional</span><input name="website" type="url" maxLength={500} autoComplete="url" placeholder="https://" aria-invalid={Boolean(fieldErrors.website)}/>{fieldErrors.website && <span className="field-error">{fieldErrors.website}</span>}</label>
+      <label className="field-wide">Business or organization description <span className="field-helper">If you do not have a website, briefly describe your organization and what you do.</span><textarea name="organizationDescription" maxLength={1500} rows={5} placeholder="Tell us about your organization..." aria-invalid={Boolean(fieldErrors.organizationDescription)}/>{fieldErrors.organizationDescription && <span className="field-error">{fieldErrors.organizationDescription}</span>}</label>
     </div>
     <div className="contact-honeypot" aria-hidden="true">
       <label>Leave this field empty<input name="companyWebsite" tabIndex={-1} autoComplete="off"/></label>
@@ -64,7 +65,7 @@ export function ContactForm() {
       {status === "submitting" ? "Sending…" : <>Start the conversation <EmojiGlyph emoji="➡️"/></>}
     </button>
     <div className="form-status" aria-live="polite" aria-atomic="true">
-      {status === "success" && <p className="form-success" role="status">Thank you. Your message has been sent to the Project Econ team.</p>}
+      {status === "success" && <p className="form-success" role="status">Thank you. Your message has been sent. We will get back to you within a few hours.</p>}
       {status === "error" && <p className="form-error" role="alert">Your message could not be sent. Please try again.</p>}
     </div>
   </form>;
