@@ -33,6 +33,7 @@ export function Navbar() {
   const pathname = usePathname();
   const menuButton = useRef<HTMLButtonElement>(null);
   const mobileMenu = useRef<HTMLDivElement>(null);
+  const lockedScrollPosition = useRef(0);
   useEffect(() => {
     const update = () => setScrolled(window.scrollY > 12);
     update();
@@ -40,14 +41,40 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", update);
   }, []);
   useEffect(() => {
+    const mobileViewport = window.matchMedia("(max-width: 760px)");
+    const closeOnDesktop = (event: MediaQueryListEvent) => { if (!event.matches) setOpen(false); };
+    mobileViewport.addEventListener("change", closeOnDesktop);
+    return () => mobileViewport.removeEventListener("change", closeOnDesktop);
+  }, []);
+  useEffect(() => {
     if (!open) return;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    const body = document.body;
+    const root = document.documentElement;
+    const previousStyles = {
+      overflow: body.style.overflow,
+      rootOverflow: root.style.overflow,
+    };
+    lockedScrollPosition.current = window.scrollY;
+    body.style.overflow = "hidden";
+    root.style.overflow = "hidden";
+    const pageRegions = Array.from(document.querySelectorAll<HTMLElement>(".site-experience > main, .site-experience > footer"));
+    pageRegions.forEach(region => { region.inert = true; });
+
+    const focusFrame = window.requestAnimationFrame(() => mobileMenu.current?.querySelector<HTMLElement>("a")?.focus());
 
     function closeFromKeyboard(event: KeyboardEvent) {
-      if (event.key !== "Escape") return;
-      setOpen(false);
-      menuButton.current?.focus();
+      if (event.key === "Escape") {
+        setOpen(false);
+        menuButton.current?.focus();
+        return;
+      }
+      if (event.key !== "Tab") return;
+      const focusable = [menuButton.current, ...Array.from(mobileMenu.current?.querySelectorAll<HTMLElement>("a") ?? [])].filter(Boolean) as HTMLElement[];
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
     }
     function closeFromOutside(event: PointerEvent) {
       const target = event.target as Node;
@@ -58,16 +85,20 @@ export function Navbar() {
     document.addEventListener("keydown", closeFromKeyboard);
     document.addEventListener("pointerdown", closeFromOutside);
     return () => {
-      document.body.style.overflow = previousOverflow;
+      window.cancelAnimationFrame(focusFrame);
+      body.style.overflow = previousStyles.overflow;
+      root.style.overflow = previousStyles.rootOverflow;
+      pageRegions.forEach(region => { region.inert = false; });
+      window.scrollTo({ top: lockedScrollPosition.current, behavior: "auto" });
       document.removeEventListener("keydown", closeFromKeyboard);
       document.removeEventListener("pointerdown", closeFromOutside);
     };
   }, [open]);
-  return <header className={`nav-wrap ${scrolled ? "is-scrolled" : ""}`}><nav className="nav container" aria-label="Main navigation">
+  return <><header className={`nav-wrap ${scrolled ? "is-scrolled" : ""} ${open ? "menu-open" : ""}`}><nav className="nav container" aria-label="Main navigation">
     <Link href="/" className="brand" aria-label="Project Econ home"><BrandLockup /></Link>
     <div className="nav-links">{links.map(l => <Link key={l.href} className={pathname === l.href ? "active" : ""} href={l.href}>{l.label}</Link>)}<Link className={`button button-small ${pathname === workWithUs.href ? "is-current" : ""}`} href={workWithUs.href}>{workWithUs.label} <EmojiGlyph emoji="↗️"/></Link></div>
     <button ref={menuButton} className="menu-button" onClick={() => setOpen(v => !v)} aria-expanded={open} aria-controls="mobile-navigation" aria-label={open ? "Close navigation" : "Open navigation"}><EmojiGlyph emoji={open ? "✖️" : "☰"}/></button>
-  </nav><AnimatePresence>{open && <motion.div ref={mobileMenu} id="mobile-navigation" className="mobile-menu" initial={{opacity:0,y:-12}} animate={{opacity:1,y:0}} exit={{opacity:0,y:-12}} transition={{ duration: MOTION.base, ease: MOTION.ease }}>{links.map(l => <Link key={l.href} className={pathname === l.href ? "active" : ""} href={l.href} onClick={() => setOpen(false)}>{l.label}</Link>)}<Link className="button" href={workWithUs.href} onClick={() => setOpen(false)}>{workWithUs.label}</Link></motion.div>}</AnimatePresence></header>
+  </nav></header><AnimatePresence>{open && <motion.div className="mobile-menu-backdrop" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{ duration: MOTION.fast }}><motion.div ref={mobileMenu} id="mobile-navigation" className="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile navigation" initial={{opacity:0,y:-18,scale:.985}} animate={{opacity:1,y:0,scale:1}} exit={{opacity:0,y:-12,scale:.99}} transition={{ duration: MOTION.base, ease: MOTION.ease }}>{links.map(l => <Link key={l.href} className={pathname === l.href ? "active" : ""} href={l.href} onClick={() => setOpen(false)}>{l.label}</Link>)}<Link className="button" href={workWithUs.href} onClick={() => setOpen(false)}>{workWithUs.label}</Link></motion.div></motion.div>}</AnimatePresence></>
 }
 
 export function Footer() { return <footer><div className="container footer-grid"><div><Link href="/" className="footer-brand" aria-label="Project Econ home"><BrandLockup /></Link><p>Project Econ is a student-led initiative that bridges economic theory and small businesses through data-driven analysis, behavioral insights, and practical economic recommendations.</p></div><div><h3>Explore</h3>{[...links, workWithUs].map(l => <Link key={l.href} href={l.href}>{l.label}</Link>)}</div><div><h3>Local to</h3><p>Cabarrus County,<br/>North Carolina</p><Link className="footer-cta" href={workWithUs.href}>Start a conversation <EmojiGlyph emoji="↗️"/></Link></div></div><div className="container footer-bottom"><span>© {new Date().getFullYear()} Project Econ</span><p>Project Econ provides free, student-led, educational recommendations. Results are not guaranteed, and each business or organization is responsible for its own decisions.</p></div></footer> }

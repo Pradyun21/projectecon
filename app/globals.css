@@ -147,6 +147,7 @@ p { line-height: 1.68; }
 .nav-links .button.is-current { box-shadow: 0 0 0 4px rgba(8, 104, 255, 0.12), var(--shadow-blue); }
 .menu-button { display: none; padding: var(--space-1); border: 0; border-radius: var(--radius-sm); background: transparent; color: var(--color-navy); cursor: pointer; }
 .mobile-menu { position: absolute; top: 72px; right: var(--space-2); left: var(--space-2); display: grid; gap: var(--space-1); padding: var(--space-2); border: 1px solid var(--color-line); border-radius: var(--radius-md); background: rgba(10,32,58,.96); box-shadow: var(--shadow-md); }
+.mobile-menu-backdrop { display: none; }
 .mobile-menu > a:not(.button) { padding: 12px; border-radius: var(--radius-sm); color: var(--color-muted); font-weight: 650; }
 .mobile-menu > a:not(.button):hover, .mobile-menu > a.active { background: var(--color-blue-wash); color: var(--color-navy); }
 
@@ -457,7 +458,7 @@ footer > .container { position: relative; z-index: 2; }
   .brand-logo-art img { top: -24.36px; left: -28.56px; width: 102.48px; }
   .nav-links { display: none; }
   .menu-button { display: grid; place-items: center; }
-  .hero { min-height: max(680px, calc(100svh - 72px)); }
+  .hero { min-height: max(680px, calc(100svh - 72px)); padding-top: 72px; }
   .hero-layout { padding: 72px 0 96px; }
   .hero-copy { grid-column: 1 / -1; }
   .hero h1 { font-size: clamp(3.5rem, 14vw, 6.5rem); letter-spacing: -0.06em; }
@@ -514,6 +515,8 @@ footer > .container { position: relative; z-index: 2; }
   .footer-grid { grid-template-columns: 1fr; gap: var(--space-6); }
   .footer-grid > div:first-child, .footer-grid > div:nth-child(2), .footer-grid > div:last-child { grid-column: 1; }
   .footer-bottom { display: block; margin-top: var(--space-6); }
+  .journey-nodes::before { left: 34px; width: 2px; opacity: .72; }
+  .intro-lockup-stage { top: 50%; left: 50%; width: min(320px, 72vw); translate: -50% -50%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -585,9 +588,40 @@ footer p, footer a, .footer-bottom { color: #afc2d7; }
   :root { --glass-blur: 10px; --glass-radius: 20px; }
   .nav-wrap { top: 8px; width: calc(100% - 20px); }
   .nav { padding-inline: 10px; }
-  .mobile-menu { border-color: var(--glass-border); background: var(--glass-fill-strong); box-shadow: inset 0 1px 0 var(--glass-highlight), var(--glass-shadow-raised); backdrop-filter: blur(12px); }
+  .nav-wrap.menu-open { border-color: var(--glass-border-blue); background: rgba(9,31,56,.92); }
+  .nav-wrap.menu-open .nav { position: relative; z-index: 2; }
+  .mobile-menu-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 49;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 92px 16px 24px;
+    background: rgba(4,18,35,.98);
+    backdrop-filter: blur(10px) saturate(1.04);
+    -webkit-backdrop-filter: blur(10px) saturate(1.04);
+  }
+  .mobile-menu {
+    position: static;
+    display: grid;
+    width: min(100%, 520px);
+    max-height: calc(100dvh - 116px);
+    gap: 10px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 14px;
+    border-color: var(--glass-border);
+    background: rgba(14,43,72,.82);
+    box-shadow: inset 0 1px 0 var(--glass-highlight), var(--glass-shadow-raised);
+    backdrop-filter: blur(14px) saturate(1.06);
+    -webkit-backdrop-filter: blur(14px) saturate(1.06);
+  }
+  .mobile-menu > a:not(.button) { display: flex; min-height: 52px; align-items: center; padding: 14px 16px; }
+  .mobile-menu > .button { min-height: 52px; margin-top: 2px; }
   .journey-shell, .journey-detail, .signature-visual, .founder-card, .contact-form, .cta-card, .community-action { backdrop-filter: none; }
   .expand-card:hover, .explore-card:hover, .project-card:hover { transform: none; }
+  .glass-ribbon-field { animation: none; }
 }
 
 /* Container-free liquid-glass icon treatment */
@@ -788,22 +822,15 @@ img, svg { height: auto; }
   .brand, .brand-lockup, .brand-logo-art { width: 38px; height: 38px; }
   .brand-logo-art img { top: -22.04px; left: -25.84px; width: 92.72px; }
   .menu-button { width: 44px; height: 44px; padding: 0; }
-  .mobile-menu {
-    top: 66px;
-    right: 0;
-    left: 0;
-    max-height: calc(100dvh - 86px);
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    padding: 10px;
-  }
+  .mobile-menu-backdrop { padding: 80px 10px 16px; }
+  .mobile-menu { max-height: calc(100dvh - 96px); padding: 12px; }
   .mobile-menu > a:not(.button), .mobile-menu > .button { min-height: 48px; }
   .mobile-menu > a:not(.button) { display: flex; align-items: center; padding-inline: 16px; }
 
   .hero {
     min-height: calc(100svh - 68px);
     height: auto;
-    padding-top: 68px;
+    padding-top: 76px;
   }
   .hero-layout { padding-block: 54px 72px; }
   .hero-copy::before { inset: -7% -8%; }
@@ -852,14 +879,16 @@ img, svg { height: auto; }
   .expand-detail p, .explore-detail { padding-inline: 16px; }
 
   .journey-shell { padding: 18px 14px; }
-  .journey-nodes::before { left: 56px; }
+  .journey-nodes::before { left: 30px; width: 2px; opacity: .72; }
   .journey-nodes button { grid-template-columns: 22px 48px minmax(0, 1fr); gap: 10px; min-height: 72px; }
   .journey-node { width: 48px; height: 48px; }
   .journey-node .emoji-glyph { width: 34px; height: 34px; font-size: 34px; }
   .journey-label strong, .journey-label small { overflow-wrap: anywhere; }
-  .journey-detail { min-height: 0; padding: 24px 18px 52px; }
+  .journey-detail { min-height: 0; padding: 30px 22px 66px; }
+  .journey-detail h3 { margin-bottom: 14px; }
+  .journey-detail p { line-height: 1.66; }
   .journey-detail::after { display: none; }
-  .journey-progress { right: 18px; bottom: 20px; left: 18px; }
+  .journey-progress { right: 22px; bottom: 26px; left: 22px; }
   .signature-visual { padding: 22px 18px; }
   .process-next { width: 100%; min-width: 0; padding: 14px 14px 14px 18px; }
   .process-next span { min-width: 0; }
@@ -888,6 +917,16 @@ img, svg { height: auto; }
   .footer-brand > .brand-lockup { width: 190px; max-width: 100%; }
   .footer-bottom { gap: 18px; padding-top: 24px; }
   .footer-bottom p { margin-top: 16px; }
+}
+
+@media (max-width: 639px) {
+  .intro-lockup-stage {
+    top: 50%;
+    left: 50%;
+    width: min(280px, 78vw);
+    translate: -50% -50%;
+  }
+  .intro-environment { opacity: .34; }
 }
 
 @media (max-width: 639px) and (orientation: landscape) {
