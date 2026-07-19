@@ -63,9 +63,8 @@ export function ContactForm() {
     <button className="button" type="submit" disabled={status === "submitting"} aria-disabled={status === "submitting"}>
       {status === "submitting" ? "Sending…" : <>Start the conversation <EmojiGlyph emoji="➡️"/></>}
     </button>
-    <p className="form-follow-up">We will respond within a few hours with a follow-up.</p>
     <div className="form-status" aria-live="polite" aria-atomic="true">
-      {status === "success" && <p className="form-success" role="status">Thank you. Your message has been sent. We will respond within a few hours with a follow-up.</p>}
+      {status === "success" && <p className="form-success" role="status">Your message has been sent. We will respond within a few hours with a follow-up!</p>}
       {status === "error" && <p className="form-error" role="alert">Your message could not be sent. Please try again.</p>}
     </div>
   </form>;
