@@ -7,6 +7,8 @@ import { BrandLockup } from "./BrandLockup";
 
 const INTRO_KEY = "project-econ-intro-seen";
 const INTRO_DURATION = 3550;
+const MOBILE_LANDING_DELAY = 1200;
+const MOBILE_INTRO_DURATION = 2300;
 
 type Target = { x: number; y: number; scale: number };
 
@@ -20,6 +22,7 @@ export function BrandIntro({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const alreadySeen = window.sessionStorage.getItem(INTRO_KEY) === "true";
+    const mobileIntro = window.matchMedia("(max-width: 760px)").matches;
 
     if (reducedMotion || alreadySeen) {
       document.documentElement.removeAttribute("data-intro");
@@ -35,9 +38,9 @@ export function BrandIntro({ children }: { children: React.ReactNode }) {
       if (!stage || !introIcon || !navIcon) return;
       if (window.matchMedia("(max-width: 760px)").matches) {
         setTarget({
-          x: navIcon.left + navIcon.width / 2 - (stage.left + stage.width / 2),
-          y: navIcon.top + navIcon.height / 2 - (stage.top + stage.height / 2),
-          scale: navIcon.height / stage.height,
+          x: navIcon.left + navIcon.width / 2 - window.innerWidth / 2,
+          y: navIcon.top + navIcon.height / 2 - window.innerHeight / 2,
+          scale: navIcon.height / iconStage.current!.offsetHeight,
         });
         return;
       }
@@ -53,16 +56,19 @@ export function BrandIntro({ children }: { children: React.ReactNode }) {
 
     const frame = window.requestAnimationFrame(measureTarget);
     window.addEventListener("resize", measureTarget);
-    const landingTimer = window.setTimeout(() => { measureTarget(); setRevealSite(true); setLanding(true); }, 2450);
+    const visualViewport = mobileIntro ? window.visualViewport : null;
+    visualViewport?.addEventListener("resize", measureTarget);
+    const landingTimer = window.setTimeout(() => { measureTarget(); setRevealSite(true); setLanding(true); }, mobileIntro ? MOBILE_LANDING_DELAY : 2450);
     const finishTimer = window.setTimeout(() => {
       window.sessionStorage.setItem(INTRO_KEY, "true");
       document.documentElement.removeAttribute("data-intro");
       setShowIntro(false);
-    }, INTRO_DURATION);
+    }, mobileIntro ? MOBILE_INTRO_DURATION : INTRO_DURATION);
 
     return () => {
       window.cancelAnimationFrame(frame);
       window.removeEventListener("resize", measureTarget);
+      visualViewport?.removeEventListener("resize", measureTarget);
       [landingTimer, finishTimer].forEach(window.clearTimeout);
       document.documentElement.removeAttribute("data-intro");
     };
