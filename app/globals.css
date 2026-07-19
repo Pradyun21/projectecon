@@ -407,7 +407,14 @@ input { width: 100%; min-height: 48px; padding: 12px 14px; border: 1px solid var
 input::placeholder { color: #8d99a8; }
 input:focus { border-color: var(--color-blue); box-shadow: 0 0 0 4px rgba(8, 104, 255, 0.1); }
 .contact-form .button { justify-self: start; }
-.form-support-note { margin: -8px 0 0; color: var(--color-muted); font-size: 0.8rem; }
+.contact-form .button:disabled { cursor: wait; opacity: .68; }
+.contact-honeypot { position: absolute !important; left: -10000px !important; width: 1px; height: 1px; overflow: hidden; }
+.field-error { color: #ffb9b9 !important; font-size: .8rem; font-weight: 600 !important; }
+.contact-form input[aria-invalid="true"] { border-color: rgba(255, 128, 128, .72); }
+.form-status:empty { display: none; }
+.form-status p { margin: 0; padding: var(--space-2); border: 1px solid var(--glass-border-blue); border-radius: var(--radius-sm); background: var(--glass-fill-soft); font-size: .875rem; }
+.form-success { color: #c9f4df; }
+.form-error { color: #ffd0d0; }
 .demo-notice { padding: var(--space-2); border: 1px solid rgba(0, 104, 72, 0.18); border-radius: var(--radius-sm); background: #edf9f4; color: #176149; }
 .demo-notice p { margin: 5px 0 0; font-size: 0.875rem; }
 
