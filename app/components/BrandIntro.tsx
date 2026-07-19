@@ -33,6 +33,14 @@ export function BrandIntro({ children }: { children: React.ReactNode }) {
       const introIcon = iconStage.current?.querySelector<HTMLElement>(".brand-logo-art")?.getBoundingClientRect();
       const navIcon = document.querySelector<HTMLElement>(".brand .brand-logo-art")?.getBoundingClientRect();
       if (!stage || !introIcon || !navIcon) return;
+      if (window.matchMedia("(max-width: 760px)").matches) {
+        setTarget({
+          x: navIcon.left + navIcon.width / 2 - (stage.left + stage.width / 2),
+          y: navIcon.top + navIcon.height / 2 - (stage.top + stage.height / 2),
+          scale: navIcon.height / stage.height,
+        });
+        return;
+      }
       const scale = navIcon.height / introIcon.height;
       const stageCenterX = stage.left + stage.width / 2;
       const stageCenterY = stage.top + stage.height / 2;
@@ -72,9 +80,11 @@ export function BrandIntro({ children }: { children: React.ReactNode }) {
           <path d="M1560 120C1250 150 1100 330 840 420S350 470-120 700L-120 850C380 630 650 650 920 545S1270 335 1560 315Z"/>
           <path d="M310-100C380 150 520 300 700 455S990 735 1160 980L960 980C800 790 585 650 465 500S150 150 85-100Z"/>
         </svg>
-        <motion.div ref={iconStage} className="intro-lockup-stage" initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, x: landing ? target.x : 0, y: landing ? target.y : 0, scale: landing ? target.scale : 1 }} transition={landing ? { duration: 1, ease: MOTION.ease } : { duration: 0.42, ease: MOTION.ease }}>
-          <BrandLockup className="brand-lockup-intro" />
-        </motion.div>
+        <div className="intro-stage-viewport">
+          <motion.div ref={iconStage} className={`intro-lockup-stage ${landing ? "is-landing" : ""}`} initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, x: landing ? target.x : 0, y: landing ? target.y : 0, scale: landing ? target.scale : 1 }} transition={landing ? { duration: 1, ease: MOTION.ease } : { duration: 0.42, ease: MOTION.ease }}>
+            <BrandLockup className="brand-lockup-intro" />
+          </motion.div>
+        </div>
       </motion.div>}
     </AnimatePresence>
   </>;
