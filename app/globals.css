@@ -156,7 +156,6 @@ p { line-height: 1.68; }
 .intro-environment { position: absolute; inset: -5%; width: 110%; height: 110%; opacity: .48; }
 .intro-environment path { fill: rgba(86, 153, 224, .075); stroke: rgba(137, 197, 250, .24); stroke-width: 1.4; vector-effect: non-scaling-stroke; }
 .intro-lockup-stage { position: absolute; z-index: 3; width: min(320px, 64vw); aspect-ratio: 1; will-change: transform, opacity; }
-.intro-stage-viewport { display: contents; }
 .brand-lockup-intro, .brand-lockup-intro .brand-logo-art { width: 100%; height: 100%; }
 .brand-lockup-intro .brand-logo-art img { top: -58%; left: -68%; width: 244%; }
 [data-intro="active"] .brand .brand-logo-art { opacity: 0; }
@@ -517,26 +516,8 @@ footer > .container { position: relative; z-index: 2; }
   .footer-grid > div:first-child, .footer-grid > div:nth-child(2), .footer-grid > div:last-child { grid-column: 1; }
   .footer-bottom { display: block; margin-top: var(--space-6); }
   .journey-nodes::before { left: 34px; width: 2px; opacity: .72; }
-  .intro-lockup-stage {
-    position: relative;
-    inset: auto;
-    width: clamp(160px, 56vw, 420px);
-    margin: 0;
-    transform-origin: center;
-  }
-  .intro-stage-viewport {
-    position: fixed;
-    inset: 0;
-    z-index: 3;
-    display: grid;
-    width: 100vw;
-    height: 100dvh;
-    place-items: center;
-    overflow: visible;
-    pointer-events: none;
-  }
-  .brand-lockup-intro { transform: scale(.56); transition: transform 1s var(--ease-standard); }
-  .intro-lockup-stage.is-landing .brand-lockup-intro { transform: scale(1); }
+  .brand-intro { display: none !important; }
+  .site-experience { opacity: 1 !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -937,13 +918,6 @@ img, svg { height: auto; }
   .footer-brand > .brand-lockup { width: 190px; max-width: 100%; }
   .footer-bottom { gap: 18px; padding-top: 24px; }
   .footer-bottom p { margin-top: 16px; }
-}
-
-@media (max-width: 639px) {
-  .intro-lockup-stage {
-    width: clamp(160px, 56vw, 240px);
-  }
-  .intro-environment { opacity: .34; }
 }
 
 @media (max-width: 639px) and (orientation: landscape) {
