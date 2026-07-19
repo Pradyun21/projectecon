@@ -31,17 +31,43 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const menuButton = useRef<HTMLButtonElement>(null);
+  const mobileMenu = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const update = () => setScrolled(window.scrollY > 12);
     update();
     window.addEventListener("scroll", update, { passive: true });
     return () => window.removeEventListener("scroll", update);
   }, []);
+  useEffect(() => {
+    if (!open) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    function closeFromKeyboard(event: KeyboardEvent) {
+      if (event.key !== "Escape") return;
+      setOpen(false);
+      menuButton.current?.focus();
+    }
+    function closeFromOutside(event: PointerEvent) {
+      const target = event.target as Node;
+      if (mobileMenu.current?.contains(target) || menuButton.current?.contains(target)) return;
+      setOpen(false);
+    }
+
+    document.addEventListener("keydown", closeFromKeyboard);
+    document.addEventListener("pointerdown", closeFromOutside);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", closeFromKeyboard);
+      document.removeEventListener("pointerdown", closeFromOutside);
+    };
+  }, [open]);
   return <header className={`nav-wrap ${scrolled ? "is-scrolled" : ""}`}><nav className="nav container" aria-label="Main navigation">
     <Link href="/" className="brand" aria-label="Project Econ home"><BrandLockup /></Link>
     <div className="nav-links">{links.map(l => <Link key={l.href} className={pathname === l.href ? "active" : ""} href={l.href}>{l.label}</Link>)}<Link className={`button button-small ${pathname === workWithUs.href ? "is-current" : ""}`} href={workWithUs.href}>{workWithUs.label} <EmojiGlyph emoji="↗️"/></Link></div>
-    <button className="menu-button" onClick={() => setOpen(v => !v)} aria-expanded={open} aria-label="Toggle navigation"><EmojiGlyph emoji={open ? "✖️" : "☰"}/></button>
-  </nav><AnimatePresence>{open && <motion.div className="mobile-menu" initial={{opacity:0,y:-12}} animate={{opacity:1,y:0}} exit={{opacity:0,y:-12}} transition={{ duration: MOTION.base, ease: MOTION.ease }}>{links.map(l => <Link key={l.href} className={pathname === l.href ? "active" : ""} href={l.href} onClick={() => setOpen(false)}>{l.label}</Link>)}<Link className="button" href={workWithUs.href} onClick={() => setOpen(false)}>{workWithUs.label}</Link></motion.div>}</AnimatePresence></header>
+    <button ref={menuButton} className="menu-button" onClick={() => setOpen(v => !v)} aria-expanded={open} aria-controls="mobile-navigation" aria-label={open ? "Close navigation" : "Open navigation"}><EmojiGlyph emoji={open ? "✖️" : "☰"}/></button>
+  </nav><AnimatePresence>{open && <motion.div ref={mobileMenu} id="mobile-navigation" className="mobile-menu" initial={{opacity:0,y:-12}} animate={{opacity:1,y:0}} exit={{opacity:0,y:-12}} transition={{ duration: MOTION.base, ease: MOTION.ease }}>{links.map(l => <Link key={l.href} className={pathname === l.href ? "active" : ""} href={l.href} onClick={() => setOpen(false)}>{l.label}</Link>)}<Link className="button" href={workWithUs.href} onClick={() => setOpen(false)}>{workWithUs.label}</Link></motion.div>}</AnimatePresence></header>
 }
 
 export function Footer() { return <footer><div className="container footer-grid"><div><Link href="/" className="footer-brand" aria-label="Project Econ home"><BrandLockup /></Link><p>Project Econ is a student-led initiative that bridges economic theory and small businesses through data-driven analysis, behavioral insights, and practical economic recommendations.</p></div><div><h3>Explore</h3>{[...links, workWithUs].map(l => <Link key={l.href} href={l.href}>{l.label}</Link>)}</div><div><h3>Local to</h3><p>Cabarrus County,<br/>North Carolina</p><Link className="footer-cta" href={workWithUs.href}>Start a conversation <EmojiGlyph emoji="↗️"/></Link></div></div><div className="container footer-bottom"><span>© {new Date().getFullYear()} Project Econ</span><p>Project Econ provides free, student-led, educational recommendations. Results are not guaranteed, and each business or organization is responsible for its own decisions.</p></div></footer> }

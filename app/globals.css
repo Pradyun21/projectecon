@@ -748,3 +748,155 @@ footer p, footer a, .footer-bottom { color: #afc2d7; }
   background: rgba(141,200,255,.15);
   box-shadow: inset 0 1px 0 rgba(255,255,255,.48), 0 10px 24px rgba(66,149,255,.12);
 }
+
+/* Responsive safeguards: desktop presentation remains unchanged above 1024px. */
+html, body { max-width: 100%; overflow-x: clip; }
+main, section, .container, .split > *, .contact-layout > *, .about-story-layout > * { min-width: 0; }
+img, svg { height: auto; }
+
+@media (min-width: 761px) and (max-width: 1024px) {
+  .container { width: min(var(--container), calc(100% - 48px)); }
+  .section { padding-block: 92px; }
+  .hero { min-height: max(700px, calc(100svh - 78px)); }
+  .hero h1 { font-size: clamp(5rem, 13vw, 8.2rem); }
+  .page-intro { padding-block: 104px 78px; }
+  .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .footer-grid > div:first-child { grid-column: 1 / span 6; }
+  .footer-grid > div:nth-child(2) { grid-column: 7 / span 2; }
+  .footer-grid > div:last-child { grid-column: 9 / span 4; }
+}
+
+@media (max-width: 639px) {
+  :root {
+    --space-6: 40px;
+    --space-8: 52px;
+    --space-12: 72px;
+  }
+  html { scroll-padding-top: 80px; }
+  #process, #difference, #exploration, #about-founder, #about-story, #about-principles { scroll-margin-top: 80px; }
+  body { font-size: 1rem; }
+  .container { width: min(var(--container), calc(100% - 32px)); }
+  .section { padding-block: 68px; }
+  h1 { font-size: clamp(2.75rem, 14vw, 4.2rem); line-height: .98; letter-spacing: -.055em; }
+  h2 { font-size: clamp(2rem, 9.5vw, 3rem); line-height: 1.08; letter-spacing: -.043em; }
+  h3 { font-size: clamp(1.2rem, 6vw, 1.45rem); }
+  p, .lead { overflow-wrap: anywhere; }
+  .lead { font-size: 1rem; line-height: 1.62; }
+
+  .nav-wrap { top: 8px; }
+  .nav { height: 60px; }
+  .brand, .brand-lockup, .brand-logo-art { width: 38px; height: 38px; }
+  .brand-logo-art img { top: -22.04px; left: -25.84px; width: 92.72px; }
+  .menu-button { width: 44px; height: 44px; padding: 0; }
+  .mobile-menu {
+    top: 66px;
+    right: 0;
+    left: 0;
+    max-height: calc(100dvh - 86px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 10px;
+  }
+  .mobile-menu > a:not(.button), .mobile-menu > .button { min-height: 48px; }
+  .mobile-menu > a:not(.button) { display: flex; align-items: center; padding-inline: 16px; }
+
+  .hero {
+    min-height: calc(100svh - 68px);
+    height: auto;
+    padding-top: 68px;
+  }
+  .hero-layout { padding-block: 54px 72px; }
+  .hero-copy::before { inset: -7% -8%; }
+  .hero-principle {
+    max-width: 100%;
+    margin-bottom: 24px;
+    padding: 9px 13px;
+    font-size: clamp(.67rem, 3.1vw, .78rem);
+    line-height: 1.35;
+    text-align: center;
+    letter-spacing: .055em;
+  }
+  .hero h1 {
+    max-width: 100%;
+    margin-bottom: 24px;
+    font-size: clamp(2.75rem, 14.5vw, 4rem);
+    line-height: .94;
+    white-space: nowrap;
+  }
+  .hero .lead { max-width: 34rem; margin-inline: auto; text-align: center; }
+  .hero-prompt { align-items: center; margin-top: 30px; text-align: center; }
+  .hero-scroll-circle { width: 44px; height: 44px; }
+  .hero-fade { height: 48px; }
+  .flow-field { inset: -1% -42%; width: 184%; height: 102%; opacity: .72; }
+  .glass-ribbon { opacity: .34; }
+  .glass-ribbon.near { opacity: .42; }
+
+  .page-intro { padding-block: 86px 54px; }
+  .page-intro > .container > div, .section-head, .exploration-head, .contact-copy, .about-story-layout > :first-child {
+    padding: 22px 18px;
+    border-radius: 20px;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  .page-intro .eyebrow, .page-intro .lead { margin-inline: auto; text-align: center; }
+  .page-intro h1, .page-intro-prominent h1 { font-size: clamp(2.65rem, 13vw, 4rem); }
+
+  .expand-card button, .explore-card button {
+    grid-template-columns: 40px minmax(0, 1fr) 18px;
+    gap: 11px;
+    min-height: 72px;
+    padding: 18px 16px;
+  }
+  .expand-icon, .explore-icon { width: 40px; height: 40px; }
+  .expand-copy strong, .explore-card button strong { overflow-wrap: anywhere; }
+  .expand-detail p, .explore-detail { padding-inline: 16px; }
+
+  .journey-shell { padding: 18px 14px; }
+  .journey-nodes::before { left: 56px; }
+  .journey-nodes button { grid-template-columns: 22px 48px minmax(0, 1fr); gap: 10px; min-height: 72px; }
+  .journey-node { width: 48px; height: 48px; }
+  .journey-node .emoji-glyph { width: 34px; height: 34px; font-size: 34px; }
+  .journey-label strong, .journey-label small { overflow-wrap: anywhere; }
+  .journey-detail { min-height: 0; padding: 24px 18px 52px; }
+  .journey-detail::after { display: none; }
+  .journey-progress { right: 18px; bottom: 20px; left: 18px; }
+  .signature-visual { padding: 22px 18px; }
+  .process-next { width: 100%; min-width: 0; padding: 14px 14px 14px 18px; }
+  .process-next span { min-width: 0; }
+  .process-next strong { overflow-wrap: anywhere; }
+  .process-next i { width: 44px; height: 44px; }
+
+  .community-action, .cta-card, .empty-card, .founder-card, .contact-form { padding: 24px 18px; }
+  .founder-meta { align-items: stretch; flex-direction: column; }
+  .founder-meta span { width: 100%; }
+  .large-copy { font-size: 1.2rem; line-height: 1.5; }
+  .exploration-head { gap: 18px; }
+  .explore-detail dl > div { padding-block: 12px; }
+
+  .contact-layout { gap: 32px; }
+  .contact-copy ul { padding-left: 0; }
+  .contact-copy li { align-items: flex-start; }
+  .field-grid label, input { min-width: 0; }
+  input { min-height: 50px; font-size: 16px; }
+  .contact-form .button { min-height: 50px; white-space: normal; }
+  .demo-notice, .disclaimer { overflow-wrap: anywhere; }
+
+  footer { padding-block: 64px 28px; }
+  .footer-grid { gap: 38px; }
+  .footer-grid > div { width: 100%; }
+  .footer-grid a:not(.footer-brand) { display: flex; min-height: 44px; align-items: center; }
+  .footer-brand > .brand-lockup { width: 190px; max-width: 100%; }
+  .footer-bottom { gap: 18px; padding-top: 24px; }
+  .footer-bottom p { margin-top: 16px; }
+}
+
+@media (max-width: 639px) and (orientation: landscape) {
+  .hero { min-height: auto; }
+  .hero-layout { padding-block: 42px 58px; }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .button:hover, .expand-card:hover, .explore-card:hover, .project-card:hover, .hero-prompt:hover { transform: none; }
+  .button, .menu-button, .journey-nodes button, .expand-card button, .explore-card button { min-height: 44px; }
+  .ambient-background { --pointer-x: 0px !important; --pointer-y: 0px !important; transition: none; }
+}
