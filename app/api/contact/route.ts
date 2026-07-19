@@ -12,7 +12,6 @@ type ContactPayload = {
   organization: string;
   email: string;
   website: string;
-  organizationDescription: string;
   companyWebsite: string;
 };
 
@@ -33,7 +32,6 @@ function validate(body: unknown): { data?: ContactPayload; errors?: FieldErrors 
     organization: stringValue(input.organization),
     email: stringValue(input.email).toLowerCase(),
     website: stringValue(input.website),
-    organizationDescription: stringValue(input.organizationDescription),
     companyWebsite: stringValue(input.companyWebsite),
   };
   const errors: FieldErrors = {};
@@ -59,7 +57,6 @@ function validate(body: unknown): { data?: ContactPayload; errors?: FieldErrors 
     }
   }
 
-  if (data.organizationDescription.length > 1500) errors.organizationDescription = "Description must be 1,500 characters or fewer.";
   if (data.companyWebsite) errors.companyWebsite = "Invalid form submission.";
 
   return Object.keys(errors).length ? { errors } : { data };
@@ -118,7 +115,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ ok: false, message: "Email delivery is unavailable." }, { status: 503 });
   }
 
-  const { name, organization, email, website, organizationDescription } = result.data;
+  const { name, organization, email, website } = result.data;
   const safeSubjectName = name.replace(/[\r\n]+/g, " ");
   const submittedAt = new Date().toLocaleString("en-US", {
     dateStyle: "full",
@@ -130,7 +127,6 @@ export async function POST(request: NextRequest) {
     ["Email", email],
     ["Business or organization name", organization],
     ["Website URL", website || "Not provided"],
-    ["Business or organization description", organizationDescription || "Not provided"],
     ["Submission date and time", `${submittedAt} (America/New_York)`],
   ];
   const html = `<!doctype html><html><body style="font-family:Arial,sans-serif;color:#0b1f35;line-height:1.5"><h1 style="font-size:22px">New Project Econ inquiry</h1><table style="border-collapse:collapse;width:100%;max-width:680px">${fields.map(([label, value]) => `<tr><th style="padding:10px;border-bottom:1px solid #d8ecff;text-align:left;vertical-align:top;width:190px">${escapeHtml(label)}</th><td style="padding:10px;border-bottom:1px solid #d8ecff;white-space:pre-wrap">${escapeHtml(value)}</td></tr>`).join("")}</table></body></html>`;
